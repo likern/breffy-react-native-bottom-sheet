@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@gorhom/bottom-sheet": ["../src/index"]
+      "@breeffy/react-native-bottom-sheet": ["../src/index"]
     },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,

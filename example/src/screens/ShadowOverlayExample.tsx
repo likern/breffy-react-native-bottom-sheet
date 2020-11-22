@@ -7,7 +7,7 @@ import Animated, {
   interpolate,
   Extrapolate,
 } from 'react-native-reanimated';
-import BottomSheet from '@gorhom/bottom-sheet';
+import BottomSheet from '@breeffy/react-native-bottom-sheet';
 import Button from '../components/button';
 import ContactList from '../components/contactList';
 

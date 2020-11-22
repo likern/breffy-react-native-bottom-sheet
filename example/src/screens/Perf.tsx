@@ -6,7 +6,7 @@ import React, {
   useState,
 } from 'react';
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
-import BottomSheet from '@gorhom/bottom-sheet';
+import BottomSheet from '@breeffy/react-native-bottom-sheet';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 const App = () => {

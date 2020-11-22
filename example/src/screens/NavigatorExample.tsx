@@ -7,7 +7,9 @@ import {
   StackNavigationOptions,
   TransitionPresets,
 } from '@react-navigation/stack';
-import BottomSheet, { TouchableOpacity } from '@gorhom/bottom-sheet';
+import BottomSheet, {
+  TouchableOpacity,
+} from '@breeffy/react-native-bottom-sheet';
 import Button from '../components/button';
 import createDummyScreen from './DummyScreen';
 
