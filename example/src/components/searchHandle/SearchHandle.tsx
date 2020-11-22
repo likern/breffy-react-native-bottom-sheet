@@ -6,7 +6,7 @@ import {
   NativeSyntheticEvent,
   TextInputChangeEventData,
 } from 'react-native';
-import { useBottomSheet } from '@gorhom/bottom-sheet';
+import { useBottomSheet } from '@breeffy/react-native-bottom-sheet';
 import { TextInput } from 'react-native-gesture-handler';
 import isEqual from 'lodash.isequal';
 import { useState } from 'react';

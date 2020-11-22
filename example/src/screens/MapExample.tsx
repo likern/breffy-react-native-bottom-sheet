@@ -15,7 +15,9 @@ import Animated, {
   useAnimatedStyle,
 } from 'react-native-reanimated';
 import { useSafeArea } from 'react-native-safe-area-context';
-import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
+import BottomSheet, {
+  BottomSheetScrollView,
+} from '@breeffy/react-native-bottom-sheet';
 import SearchHandle from '../components/searchHandle';
 import LocationItem from '../components/locationItem';
 import { createLocationListMockData } from '../utilities';

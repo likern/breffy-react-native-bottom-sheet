@@ -7,7 +7,7 @@ import {
   BottomSheetScrollView,
   BottomSheetSectionList,
   BottomSheetView,
-} from '@gorhom/bottom-sheet';
+} from '@breeffy/react-native-bottom-sheet';
 import {
   createContactListMockData,
   createContactSectionsMockData,

@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
-import { BottomSheetHandleProps } from '@gorhom/bottom-sheet';
+import { BottomSheetHandleProps } from '@breeffy/react-native-bottom-sheet';
 import Animated, {
   Extrapolate,
   interpolate,
@@ -15,8 +15,6 @@ interface HandleProps extends BottomSheetHandleProps {
 }
 
 const Handle: React.FC<HandleProps> = ({ style, animatedPositionIndex }) => {
-  //#region animations
-
   const indicatorTransformOriginY = useDerivedValue(() =>
     interpolate(
       animatedPositionIndex.value,
@@ -25,9 +23,7 @@ const Handle: React.FC<HandleProps> = ({ style, animatedPositionIndex }) => {
       Extrapolate.CLAMP
     )
   );
-  //#endregion
 
-  //#region styles
   const containerStyle = useMemo(() => [styles.header, style], [style]);
   const containerAnimatedStyle = useAnimatedStyle(() => {
     const borderTopRadius = interpolate(
@@ -93,7 +89,6 @@ const Handle: React.FC<HandleProps> = ({ style, animatedPositionIndex }) => {
       ),
     };
   });
-  //#endregion
 
   // render
   return (

@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { Text, StyleSheet, ViewStyle } from 'react-native';
-import { TouchableOpacity } from '@gorhom/bottom-sheet';
+import { TouchableOpacity } from '@breeffy/react-native-bottom-sheet';
 
 interface ButtonProps {
   label: string;
