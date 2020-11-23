@@ -7,7 +7,7 @@ import Animated, {
   interpolate,
   Extrapolate,
 } from 'react-native-reanimated';
-import BottomSheet from '@breeffy/react-native-bottom-sheet';
+import { BottomSheet } from '@breeffy/react-native-bottom-sheet';
 import Button from '../components/button';
 import ContactList from '../components/contactList';
 
@@ -142,4 +142,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ShadowOverlayExample;
+export { ShadowOverlayExample };

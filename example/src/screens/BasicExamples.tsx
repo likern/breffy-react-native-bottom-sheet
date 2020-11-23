@@ -1,6 +1,6 @@
 import React, { useCallback, memo, useRef, useMemo } from 'react';
 import { StyleSheet, View } from 'react-native';
-import BottomSheet from '@breeffy/react-native-bottom-sheet';
+import { BottomSheet } from '@breeffy/react-native-bottom-sheet';
 import ContactList from '../components/contactList';
 import Button from '../components/button';
 import { useHeaderHeight } from '@react-navigation/stack';

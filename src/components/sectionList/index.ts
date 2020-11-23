@@ -1,1 +1,1 @@
-export { default } from './SectionList';
+export { BottomSheetSectionList } from './SectionList';

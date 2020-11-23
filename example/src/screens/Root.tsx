@@ -75,4 +75,4 @@ const RootScreen = () => {
   );
 };
 
-export default RootScreen;
+export { RootScreen };

@@ -14,7 +14,7 @@ import {
 import isEqual from 'lodash.isequal';
 import Animated from 'react-native-reanimated';
 import { NativeViewGestureHandler } from 'react-native-gesture-handler';
-import DraggableView from '../draggableView';
+import { BottomSheetDraggableView } from '../draggableView';
 import { useScrollableInternal, useBottomSheetInternal } from '../../hooks';
 import type {
   BottomSheetFlatListProps,
@@ -55,7 +55,7 @@ const BottomSheetFlatListComponent = forwardRef(
 
     // render
     return (
-      <DraggableView
+      <BottomSheetDraggableView
         nativeGestureRef={nativeGestureRef}
         style={styles.container}
       >
@@ -76,11 +76,14 @@ const BottomSheetFlatListComponent = forwardRef(
               : {})}
           />
         </NativeViewGestureHandler>
-      </DraggableView>
+      </BottomSheetDraggableView>
     );
   }
 );
 
-const BottomSheetFlatList = memo(BottomSheetFlatListComponent, isEqual);
+const BottomSheetFlatList = (memo(
+  BottomSheetFlatListComponent,
+  isEqual
+) as unknown) as typeof BottomSheetFlatListType;
 
-export default (BottomSheetFlatList as any) as typeof BottomSheetFlatListType;
+export { BottomSheetFlatList };

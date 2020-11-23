@@ -1,9 +1,9 @@
-export { default } from './components/bottomSheet';
-export { default as BottomSheetFlatList } from './components/flatList';
-export { default as BottomSheetSectionList } from './components/sectionList';
-export { default as BottomSheetScrollView } from './components/scrollView';
-export { default as BottomSheetDraggableView } from './components/draggableView';
-export { default as BottomSheetView } from './components/view';
+export { BottomSheet } from './components/bottomSheet';
+export { BottomSheetFlatList } from './components/flatList';
+export { BottomSheetSectionList } from './components/sectionList';
+export { BottomSheetScrollView } from './components/scrollView';
+export { BottomSheetDraggableView } from './components/draggableView';
+export { BottomSheetView } from './components/view';
 
 import BottomSheetTouchable from './components/touchables';
 export const {

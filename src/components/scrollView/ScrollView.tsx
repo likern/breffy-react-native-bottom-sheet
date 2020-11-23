@@ -14,7 +14,7 @@ import {
 import isEqual from 'lodash.isequal';
 import Animated from 'react-native-reanimated';
 import { NativeViewGestureHandler } from 'react-native-gesture-handler';
-import DraggableView from '../draggableView';
+import { BottomSheetDraggableView } from '../draggableView';
 import { useScrollableInternal, useBottomSheetInternal } from '../../hooks';
 import type {
   BottomSheetScrollViewType,
@@ -54,7 +54,7 @@ const BottomSheetScrollViewComponent = forwardRef(
     useFocusHook(handleSettingScrollable);
 
     return (
-      <DraggableView
+      <BottomSheetDraggableView
         nativeGestureRef={nativeGestureRef}
         style={styles.container}
       >
@@ -74,11 +74,14 @@ const BottomSheetScrollViewComponent = forwardRef(
               : {})}
           />
         </NativeViewGestureHandler>
-      </DraggableView>
+      </BottomSheetDraggableView>
     );
   }
 );
 
-const BottomSheetScrollView = memo(BottomSheetScrollViewComponent, isEqual);
+const BottomSheetScrollView = (memo(
+  BottomSheetScrollViewComponent,
+  isEqual
+) as unknown) as typeof BottomSheetScrollViewType;
 
-export default (BottomSheetScrollView as any) as typeof BottomSheetScrollViewType;
+export { BottomSheetScrollView };

@@ -15,7 +15,8 @@ import Animated, {
   useAnimatedStyle,
 } from 'react-native-reanimated';
 import { useSafeArea } from 'react-native-safe-area-context';
-import BottomSheet, {
+import {
+  BottomSheet,
   BottomSheetScrollView,
 } from '@breeffy/react-native-bottom-sheet';
 import SearchHandle from '../components/searchHandle';
@@ -158,4 +159,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MapExample;
+export { MapExample };

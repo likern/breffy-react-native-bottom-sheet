@@ -55,4 +55,4 @@ const BottomSheetDraggableView = memo(
   isEqual
 );
 
-export default BottomSheetDraggableView;
+export { BottomSheetDraggableView };
