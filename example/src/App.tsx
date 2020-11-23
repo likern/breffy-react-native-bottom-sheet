@@ -2,6 +2,17 @@ import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { AppStackParamsList } from './types';
+import {
+  RootScreen,
+  FlatListExampleScreen,
+  SectionListExampleScreen,
+  ScrollViewExampleScreen,
+  ViewExampleScreen,
+  NavigatorExample,
+  CustomHandleExample,
+  ShadowOverlayExample,
+  MapExample,
+} from './screens';
 
 const Stack = createStackNavigator<AppStackParamsList>();
 function App() {
@@ -10,53 +21,39 @@ function App() {
       <Stack.Navigator initialRouteName="Root">
         <Stack.Screen
           name="Root"
-          getComponent={() => require('./screens/Root').default}
+          component={RootScreen}
           options={{ headerShown: false }}
         />
         {/* basic examples */}
         <Stack.Screen
           name="FlatListExample"
-          getComponent={() =>
-            require('./screens/BasicExamples').FlatListExampleScreen
-          }
+          component={FlatListExampleScreen}
         />
         <Stack.Screen
           name="SectionListExample"
-          getComponent={() =>
-            require('./screens/BasicExamples').SectionListExampleScreen
-          }
+          component={SectionListExampleScreen}
         />
         <Stack.Screen
           name="ScrollViewExample"
-          getComponent={() =>
-            require('./screens/BasicExamples').ScrollViewExampleScreen
-          }
+          component={ScrollViewExampleScreen}
         />
-        <Stack.Screen
-          name="ViewExample"
-          getComponent={() =>
-            require('./screens/BasicExamples').ViewExampleScreen
-          }
-        />
+        <Stack.Screen name="ViewExample" component={ViewExampleScreen} />
         {/* advanced examples */}
-        <Stack.Screen
-          name="NavigatorExample"
-          getComponent={() => require('./screens/NavigatorExample').default}
-        />
+        <Stack.Screen name="NavigatorExample" component={NavigatorExample} />
         <Stack.Screen
           name="CustomHandleExample"
-          getComponent={() => require('./screens/CustomHandleExample').default}
+          component={CustomHandleExample}
         />
         <Stack.Screen
           name="ShadowOverlayExample"
-          getComponent={() => require('./screens/ShadowOverlayExample').default}
+          component={ShadowOverlayExample}
         />
         <Stack.Screen
           name="MapExample"
+          component={MapExample}
           options={{
             headerShown: false,
           }}
-          getComponent={() => require('./screens/MapExample').default}
         />
       </Stack.Navigator>
     </NavigationContainer>

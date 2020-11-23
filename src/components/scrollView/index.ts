@@ -1,1 +1,1 @@
-export { default } from './ScrollView';
+export { BottomSheetScrollView } from './ScrollView';

@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo, useRef } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { useHeaderHeight } from '@react-navigation/stack';
-import BottomSheet from '@breeffy/react-native-bottom-sheet';
+import { BottomSheet } from '@breeffy/react-native-bottom-sheet';
 import Handle from '../components/handle';
 import Button from '../components/button';
 import ContactList from '../components/contactList';
@@ -116,4 +116,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CustomHandleExample;
+export { CustomHandleExample };

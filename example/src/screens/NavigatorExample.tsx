@@ -7,7 +7,8 @@ import {
   StackNavigationOptions,
   TransitionPresets,
 } from '@react-navigation/stack';
-import BottomSheet, {
+import {
+  BottomSheet,
   TouchableOpacity,
 } from '@breeffy/react-native-bottom-sheet';
 import Button from '../components/button';
@@ -152,4 +153,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default NavigatorExample;
+export { NavigatorExample };

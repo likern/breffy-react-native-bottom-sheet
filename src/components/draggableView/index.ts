@@ -1,1 +1,1 @@
-export { default } from './DraggableView';
+export { BottomSheetDraggableView } from './DraggableView';

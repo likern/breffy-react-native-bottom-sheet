@@ -42,7 +42,7 @@ import {
   ANIMATION_STATE,
 } from '../../constants';
 import ContentWrapper from '../contentWrapper';
-import DraggableView from '../draggableView';
+import { BottomSheetDraggableView } from '../draggableView';
 import Handle from '../handle';
 import type { ScrollableRef, BottomSheetMethods } from '../../types';
 import type { BottomSheetProps } from './types';
@@ -403,11 +403,11 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
               </PanGestureHandler>
 
               <BottomSheetInternalProvider value={internalContextVariables}>
-                <DraggableView style={styles.contentContainer}>
+                <BottomSheetDraggableView style={styles.contentContainer}>
                   {typeof children === 'function'
                     ? (children as Function)()
                     : children}
-                </DraggableView>
+                </BottomSheetDraggableView>
               </BottomSheetInternalProvider>
             </BottomSheetProvider>
           </Animated.View>
@@ -442,4 +442,4 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
 
 const BottomSheet = memo(BottomSheetComponent, isEqual);
 
-export default BottomSheet;
+export { BottomSheet };

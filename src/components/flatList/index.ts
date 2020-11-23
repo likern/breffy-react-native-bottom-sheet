@@ -1,1 +1,1 @@
-export { default } from './FlatList';
+export { BottomSheetFlatList } from './FlatList';

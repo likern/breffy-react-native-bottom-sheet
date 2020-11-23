@@ -40,4 +40,4 @@ const BottomSheetViewComponent = ({
 
 const BottomSheetView = memo(BottomSheetViewComponent, isEqual);
 
-export default BottomSheetView;
+export { BottomSheetView };
