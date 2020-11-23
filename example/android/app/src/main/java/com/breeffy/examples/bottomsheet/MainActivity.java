@@ -1,4 +1,4 @@
-package dev.gorhom.bottomsheet;
+package com.breeffy.examples.bottomsheet;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;

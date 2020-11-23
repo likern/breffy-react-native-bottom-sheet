@@ -1,7 +1,7 @@
 {
   "name": "@breeffy/react-native-bottom-sheet-example",
   "description": "Example app for @breeffy/react-native-bottom-sheet",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
