@@ -1,6 +1,6 @@
 {
-  "name": "@gorhom/bottom-sheet-example",
-  "description": "Example app for @gorhom/bottom-sheet",
+  "name": "@breeffy/react-native-bottom-sheet-example",
+  "description": "Example app for @breeffy/react-native-bottom-sheet",
   "version": "0.0.1",
   "private": true,
   "scripts": {
