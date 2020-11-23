@@ -6,11 +6,11 @@ import {
   BottomSheetFlatList,
   BottomSheetScrollView,
   BottomSheetSectionList,
-  BottomSheetView,
+  BottomSheetView
 } from '@breeffy/react-native-bottom-sheet';
 import {
   createContactListMockData,
-  createContactSectionsMockData,
+  createContactSectionsMockData
 } from '../../utilities';
 import ContactItem from '../contactItem';
 
@@ -27,7 +27,7 @@ const ContactList = ({
   count = 50,
   header = null,
   style,
-  onLayout,
+  onLayout
 }: ContactListProps) => {
   // hooks
   const { bottom: bottomSafeArea } = useSafeArea();
@@ -41,7 +41,7 @@ const ContactList = ({
     () => ({
       ...styles.contentContainer,
       ...style,
-      paddingBottom: bottomSafeArea,
+      paddingBottom: bottomSafeArea
     }),
     [style, bottomSafeArea]
   );
@@ -97,7 +97,7 @@ const ContactList = ({
         renderItem={renderFlatListItem}
         {...(header && {
           stickyHeaderIndices: [0],
-          ListHeaderComponent: header,
+          ListHeaderComponent: header
         })}
         contentContainerStyle={contentContainerStyle}
         focusHook={useFocusEffect}
@@ -127,7 +127,7 @@ const ContactList = ({
         renderItem={renderSectionItem}
         {...(header && {
           stickyHeaderIndices: [0],
-          ListHeaderComponent: header,
+          ListHeaderComponent: header
         })}
         focusHook={useFocusEffect}
         removeClippedSubviews={Platform.OS === 'android' && sections.length > 0}
@@ -150,16 +150,16 @@ const styles = StyleSheet.create({
   sectionHeaderContainer: {
     paddingTop: 24,
     paddingBottom: 6,
-    backgroundColor: 'white',
+    backgroundColor: 'white'
   },
   sectionHeaderTitle: {
     fontSize: 16,
-    textTransform: 'uppercase',
+    textTransform: 'uppercase'
   },
   contentContainer: {
     paddingHorizontal: 24,
-    backgroundColor: 'white',
-  },
+    backgroundColor: 'white'
+  }
 });
 
 export default ContactList;

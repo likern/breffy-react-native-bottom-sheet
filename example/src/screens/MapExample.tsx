@@ -4,7 +4,7 @@ import {
   StyleSheet,
   Dimensions,
   StatusBar,
-  Platform,
+  Platform
 } from 'react-native';
 import MapView from 'react-native-maps';
 import { BlurView } from '@react-native-community/blur';
@@ -12,12 +12,12 @@ import Animated, {
   interpolate,
   Extrapolate,
   useSharedValue,
-  useAnimatedStyle,
+  useAnimatedStyle
 } from 'react-native-reanimated';
 import { useSafeArea } from 'react-native-safe-area-context';
 import {
   BottomSheet,
-  BottomSheetScrollView,
+  BottomSheetScrollView
 } from '@breeffy/react-native-bottom-sheet';
 import SearchHandle from '../components/searchHandle';
 import LocationItem from '../components/locationItem';
@@ -37,7 +37,7 @@ const MapExample = () => {
     () => [
       200,
       350,
-      SCREEN_HEIGHT - topSafeArea - (StatusBar.currentHeight ?? 0),
+      SCREEN_HEIGHT - topSafeArea - (StatusBar.currentHeight ?? 0)
     ],
     [topSafeArea]
   );
@@ -63,7 +63,7 @@ const MapExample = () => {
             animatedPosition.value - snapPoints[snapPoints.length - 1],
             -350,
             -200
-          ),
+          )
         },
         {
           scale: interpolate(
@@ -71,9 +71,9 @@ const MapExample = () => {
             [-350, -400],
             [1, 0],
             Extrapolate.CLAMP
-          ),
-        },
-      ],
+          )
+        }
+      ]
     };
   }, []);
 
@@ -132,21 +132,21 @@ const MapExample = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 24,
+    padding: 24
   },
   mapContainer: {
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFillObject
   },
   contentContainerStyle: {
     flex: 1,
-    paddingHorizontal: 16,
+    paddingHorizontal: 16
   },
   blurContainer: {
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFillObject
   },
   backgroundContainer: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: '#333',
+    backgroundColor: '#333'
   },
   locationButton: {
     position: 'absolute',
@@ -155,8 +155,8 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     borderRadius: 25,
-    backgroundColor: '#888',
-  },
+    backgroundColor: '#888'
+  }
 });
 
 export { MapExample };

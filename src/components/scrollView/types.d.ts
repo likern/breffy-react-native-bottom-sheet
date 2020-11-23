@@ -1,7 +1,7 @@
 import type { Component, EffectCallback, DependencyList } from 'react';
 import type {
   ScrollViewProps as RNScrollViewProps,
-  ScrollResponderMixin,
+  ScrollResponderMixin
 } from 'react-native';
 
 export type BottomSheetScrollViewProps = Omit<

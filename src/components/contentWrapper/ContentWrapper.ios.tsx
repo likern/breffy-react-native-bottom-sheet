@@ -18,8 +18,8 @@ const ContentWrapperComponent = forwardRef<
     () => [
       styles.container,
       {
-        height,
-      },
+        height
+      }
     ],
     [height]
   );

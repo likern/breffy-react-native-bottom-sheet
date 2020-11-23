@@ -9,7 +9,7 @@ import BottomSheetTouchable from './components/touchables';
 export const {
   TouchableHighlight,
   TouchableOpacity,
-  TouchableWithoutFeedback,
+  TouchableWithoutFeedback
 } = BottomSheetTouchable;
 
 export type { BottomSheetHandleProps } from './components/handle';

@@ -11,7 +11,7 @@ import {
   NavigatorExample,
   CustomHandleExample,
   ShadowOverlayExample,
-  MapExample,
+  MapExample
 } from './screens';
 
 const Stack = createStackNavigator<AppStackParamsList>();
@@ -52,7 +52,7 @@ function App() {
           name="MapExample"
           component={MapExample}
           options={{
-            headerShown: false,
+            headerShown: false
           }}
         />
       </Stack.Navigator>

@@ -1,11 +1,11 @@
 import Animated, {
   useAnimatedGestureHandler,
   useSharedValue,
-  cancelAnimation,
+  cancelAnimation
 } from 'react-native-reanimated';
 import {
   State,
-  PanGestureHandlerGestureEvent,
+  PanGestureHandlerGestureEvent
 } from 'react-native-gesture-handler';
 import { clamp, snapPoint } from 'react-native-redash';
 import { GESTURE } from '../constants';
@@ -77,7 +77,7 @@ export const useInteractivePanGestureHandler = (
             snapPoints
           )
         );
-      },
+      }
     },
     [type, snapPoints, animateToPoint]
   );

@@ -85,39 +85,39 @@ const createExampleScreen = ({ type, count = 50 }: ExampleScreenProps) =>
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 24,
+    padding: 24
   },
   title: {
     fontSize: 46,
     lineHeight: 46,
-    fontWeight: '800',
+    fontWeight: '800'
   },
   headerContainer: {
     paddingVertical: 24,
-    backgroundColor: 'white',
+    backgroundColor: 'white'
   },
   buttonContainer: {
-    marginBottom: 6,
-  },
+    marginBottom: 6
+  }
 });
 
 export const FlatListExampleScreen = createExampleScreen({
   title: 'FlatList Example',
-  type: 'FlatList',
+  type: 'FlatList'
 });
 
 export const ScrollViewExampleScreen = createExampleScreen({
   title: 'Title',
-  type: 'ScrollView',
+  type: 'ScrollView'
 });
 
 export const SectionListExampleScreen = createExampleScreen({
   title: 'Title',
-  type: 'SectionList',
+  type: 'SectionList'
 });
 
 export const ViewExampleScreen = createExampleScreen({
   title: 'Title',
   type: 'View',
-  count: 8,
+  count: 8
 });

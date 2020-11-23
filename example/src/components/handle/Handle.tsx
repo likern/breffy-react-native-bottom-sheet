@@ -5,7 +5,7 @@ import Animated, {
   Extrapolate,
   interpolate,
   useAnimatedStyle,
-  useDerivedValue,
+  useDerivedValue
 } from 'react-native-reanimated';
 import { toRad } from 'react-native-redash';
 import { transformOrigin } from '../../utilities/transformOrigin';
@@ -34,13 +34,13 @@ const Handle: React.FC<HandleProps> = ({ style, animatedPositionIndex }) => {
     );
     return {
       borderTopLeftRadius: borderTopRadius,
-      borderTopRightRadius: borderTopRadius,
+      borderTopRightRadius: borderTopRadius
     };
   });
   const leftIndicatorStyle = useMemo(
     () => ({
       ...styles.indicator,
-      ...styles.leftIndicator,
+      ...styles.leftIndicator
     }),
     []
   );
@@ -55,18 +55,18 @@ const Handle: React.FC<HandleProps> = ({ style, animatedPositionIndex }) => {
       transform: transformOrigin(
         { x: 0, y: indicatorTransformOriginY.value },
         {
-          rotate: `${leftIndicatorRotate}rad`,
+          rotate: `${leftIndicatorRotate}rad`
         },
         {
-          translateX: -5,
+          translateX: -5
         }
-      ),
+      )
     };
   });
   const rightIndicatorStyle = useMemo(
     () => ({
       ...styles.indicator,
-      ...styles.rightIndicator,
+      ...styles.rightIndicator
     }),
     []
   );
@@ -81,12 +81,12 @@ const Handle: React.FC<HandleProps> = ({ style, animatedPositionIndex }) => {
       transform: transformOrigin(
         { x: 0, y: indicatorTransformOriginY.value },
         {
-          rotate: `${rightIndicatorRotate}rad`,
+          rotate: `${rightIndicatorRotate}rad`
         },
         {
-          translateX: 5,
+          translateX: 5
         }
-      ),
+      )
     };
   });
 
@@ -116,26 +116,26 @@ const styles = StyleSheet.create({
     shadowColor: 'black',
     shadowOffset: {
       width: 0,
-      height: -20,
+      height: -20
     },
     shadowOpacity: 0.1,
     shadowRadius: 10,
     elevation: 16,
     borderBottomWidth: 1,
-    borderBottomColor: '#fff',
+    borderBottomColor: '#fff'
   },
   indicator: {
     position: 'absolute',
     width: 10,
     height: 4,
-    backgroundColor: '#999',
+    backgroundColor: '#999'
   },
   leftIndicator: {
     borderTopStartRadius: 2,
-    borderBottomStartRadius: 2,
+    borderBottomStartRadius: 2
   },
   rightIndicator: {
     borderTopEndRadius: 2,
-    borderBottomEndRadius: 2,
-  },
+    borderBottomEndRadius: 2
+  }
 });

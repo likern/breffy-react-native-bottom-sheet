@@ -9,7 +9,7 @@ import { runOnUI } from 'react-native-reanimated';
 const BottomSheetViewComponent = ({
   children,
   style,
-  focusHook: useFocusHook = useEffect,
+  focusHook: useFocusHook = useEffect
 }: BottomSheetViewProps) => {
   // hooks
   const { scrollableContentOffsetY } = useBottomSheetInternal();
@@ -19,7 +19,7 @@ const BottomSheetViewComponent = ({
     () => ({
       ...styles.container,
       // @ts-ignore
-      ...style,
+      ...style
     }),
     [style]
   );

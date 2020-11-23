@@ -15,7 +15,7 @@ export const useScrollable = () => {
   // callbacks
   const setScrollableRef = useCallback((ref: ScrollableRef) => {
     // get current node handle id
-    let currentRefId = scrollableRef.current?.id ?? null;
+    const currentRefId = scrollableRef.current?.id ?? null;
 
     if (currentRefId !== ref.id) {
       if (scrollableRef.current) {
@@ -29,10 +29,10 @@ export const useScrollable = () => {
 
   const removeScrollableRef = useCallback((ref: RefObject<Scrollable>) => {
     // find node handle id
-    let id = findNodeHandle(ref.current);
+    const id = findNodeHandle(ref.current);
 
     // get current node handle id
-    let currentRefId = scrollableRef.current?.id ?? null;
+    const currentRefId = scrollableRef.current?.id ?? null;
 
     /**
      * @DEV
@@ -46,9 +46,9 @@ export const useScrollable = () => {
   }, []);
 
   const flashScrollableIndicators = useCallback(() => {
-    let type = scrollableRef.current?.type ?? undefined;
-    let node = scrollableRef.current?.node ?? undefined;
-    let didResize = scrollableRef.current?.didResize ?? false;
+    const type = scrollableRef.current?.type ?? undefined;
+    const node = scrollableRef.current?.node ?? undefined;
+    const didResize = scrollableRef.current?.didResize ?? false;
 
     if (!type || !node) {
       return;
@@ -66,7 +66,7 @@ export const useScrollable = () => {
       if (Platform.OS === 'ios' && !didResize) {
         // @ts-ignore
         node.current.setNativeProps({
-          bottom: 0.5,
+          bottom: 0.5
         });
 
         // @ts-ignore
@@ -81,6 +81,6 @@ export const useScrollable = () => {
     scrollableDecelerationRate,
     setScrollableRef,
     removeScrollableRef,
-    flashScrollableIndicators,
+    flashScrollableIndicators
   };
 };

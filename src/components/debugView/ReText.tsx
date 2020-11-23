@@ -15,7 +15,7 @@ const ReText = (props: TextProps) => {
   const { text, value, style } = { style: {}, ...props };
   const animatedProps = useAnimatedProps(() => {
     return {
-      text: `${text}: ${value.value.toFixed(2)}`,
+      text: `${text}: ${value.value.toFixed(2)}`
     };
   });
   return (

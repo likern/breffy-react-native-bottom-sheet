@@ -5,7 +5,7 @@ import {
   useAnimatedScrollHandler,
   useSharedValue,
   scrollTo,
-  runOnUI,
+  runOnUI
 } from 'react-native-reanimated';
 import { useScrollableAnimatedProps } from './useScrollableAnimatedProps';
 import { useBottomSheetInternal } from './useBottomSheetInternal';
@@ -23,7 +23,7 @@ export const useScrollableInternal = (type: ScrollableType) => {
     animatedPosition,
     scrollableContentOffsetY: _scrollableContentOffsetY,
     setScrollableRef,
-    removeScrollableRef,
+    removeScrollableRef
   } = useBottomSheetInternal();
 
   // callbacks
@@ -58,7 +58,7 @@ export const useScrollableInternal = (type: ScrollableType) => {
           scrollTo(scrollableRef, 0, scrollablePosition.value, false);
           return;
         }
-      },
+      }
     },
     []
   );
@@ -75,7 +75,7 @@ export const useScrollableInternal = (type: ScrollableType) => {
         id: id,
         type,
         node: scrollableRef,
-        didResize: false,
+        didResize: false
       });
     } else {
       console.warn(`Couldn't find the scrollable node handle id!`);
@@ -91,6 +91,6 @@ export const useScrollableInternal = (type: ScrollableType) => {
     scrollableRef,
     scrollableAnimatedProps,
     handleScrollEvent,
-    handleSettingScrollable,
+    handleSettingScrollable
   };
 };

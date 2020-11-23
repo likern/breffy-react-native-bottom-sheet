@@ -24,11 +24,11 @@ const styles = StyleSheet.create({
   container: {
     padding: 12,
     borderRadius: 4,
-    backgroundColor: '#333',
+    backgroundColor: '#333'
   },
   label: {
-    color: 'white',
-  },
+    color: 'white'
+  }
 });
 
 export default Button;

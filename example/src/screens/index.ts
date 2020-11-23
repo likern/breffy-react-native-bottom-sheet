@@ -3,7 +3,7 @@ export {
   FlatListExampleScreen,
   ScrollViewExampleScreen,
   SectionListExampleScreen,
-  ViewExampleScreen,
+  ViewExampleScreen
 } from './BasicExamples';
 export { NavigatorExample } from './NavigatorExample';
 export { CustomHandleExample } from './CustomHandleExample';

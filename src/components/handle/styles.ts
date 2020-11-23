@@ -13,16 +13,16 @@ export const styles = StyleSheet.create({
     shadowColor: 'black',
     shadowOffset: {
       width: 0,
-      height: 0,
+      height: 0
     },
     shadowOpacity: 0.25,
-    shadowRadius: 15,
+    shadowRadius: 15
   },
   container: {
     padding: 10,
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
-    backgroundColor: 'white',
+    backgroundColor: 'white'
   },
 
   indicator: {
@@ -30,6 +30,6 @@ export const styles = StyleSheet.create({
     width: (7.5 * windowWidth) / 100,
     height: 4,
     borderRadius: 4,
-    backgroundColor: 'rgba(0, 0, 0, 0.75)',
-  },
+    backgroundColor: 'rgba(0, 0, 0, 0.75)'
+  }
 });
