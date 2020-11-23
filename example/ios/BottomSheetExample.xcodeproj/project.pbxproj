@@ -290,7 +290,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "dev.gorhom.bottom-sheet";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.breeffy.examples.bottomsheet";
 				PRODUCT_NAME = BottomSheetExample;
 				SWIFT_OBJC_BRIDGING_HEADER = "BottomSheetExample-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -319,7 +319,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "dev.gorhom.bottom-sheet";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.breeffy.examples.bottomsheet";
 				PRODUCT_NAME = BottomSheetExample;
 				SWIFT_OBJC_BRIDGING_HEADER = "BottomSheetExample-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
