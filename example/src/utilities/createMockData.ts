@@ -10,7 +10,7 @@ export const createContactListMockData = (count: number = 50): Contact[] => {
   return new Array(count).fill(0).map(() => ({
     name: `${Faker.name.firstName()} ${Faker.name.lastName()}`,
     address: `${Faker.address.city()}, ${Faker.address.country()}`,
-    jobTitle: Faker.name.jobTitle(),
+    jobTitle: Faker.name.jobTitle()
   }));
 };
 
@@ -20,8 +20,8 @@ export const createContactSectionsMockData = (count: number = 50) => {
     data: new Array(Math.round(count / 2)).fill(0).map(() => ({
       name: `${Faker.name.firstName()} ${Faker.name.lastName()}`,
       address: `${Faker.address.city()}, ${Faker.address.country()}`,
-      jobTitle: Faker.name.jobTitle(),
-    })),
+      jobTitle: Faker.name.jobTitle()
+    }))
   }));
 };
 
@@ -29,6 +29,6 @@ export const createLocationListMockData = (count: number = 50): Contact[] => {
   return new Array(count).fill(0).map(() => ({
     name: `${Faker.company.companyName()}`,
     address: `${Faker.address.city()}, ${Faker.address.country()}`,
-    jobTitle: '',
+    jobTitle: ''
   }));
 };

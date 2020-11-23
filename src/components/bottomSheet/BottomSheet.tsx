@@ -4,7 +4,7 @@ import React, {
   useCallback,
   forwardRef,
   useImperativeHandle,
-  memo,
+  memo
 } from 'react';
 import { ViewStyle } from 'react-native';
 import isEqual from 'lodash.isequal';
@@ -18,28 +18,28 @@ import Animated, {
   interpolate,
   Extrapolate,
   runOnJS,
-  runOnUI,
+  runOnUI
 } from 'react-native-reanimated';
 import {
   PanGestureHandler,
   State,
-  TapGestureHandler,
+  TapGestureHandler
 } from 'react-native-gesture-handler';
 import {
   useInteractivePanGestureHandler,
   useStableCallback,
-  useScrollable,
+  useScrollable
 } from '../../hooks';
 import { normalizeSnapPoints } from '../../utilities';
 import {
   BottomSheetInternalProvider,
-  BottomSheetProvider,
+  BottomSheetProvider
 } from '../../contexts';
 import {
   DEFAULT_ANIMATION_EASING,
   DEFAULT_ANIMATION_DURATION,
   GESTURE,
-  ANIMATION_STATE,
+  ANIMATION_STATE
 } from '../../constants';
 import ContentWrapper from '../contentWrapper';
 import { BottomSheetDraggableView } from '../draggableView';
@@ -49,7 +49,7 @@ import type { BottomSheetProps } from './types';
 import { styles } from './styles';
 
 Animated.addWhitelistedUIProps({
-  decelerationRate: true,
+  decelerationRate: true
 });
 
 type BottomSheet = BottomSheetMethods;
@@ -72,7 +72,7 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
       // components
       handleComponent: HandleComponent = Handle,
       backgroundComponent: BackgroundComponent = null,
-      children,
+      children
     },
     ref
   ) => {
@@ -133,7 +133,7 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
       scrollableDecelerationRate,
       setScrollableRef,
       removeScrollableRef,
-      flashScrollableIndicators,
+      flashScrollableIndicators
     } = useScrollable();
 
     // normalize snap points
@@ -145,7 +145,7 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
         snapPoints: normalizedSnapPoints.map(
           normalizedSnapPoint => maxSnapPoint - normalizedSnapPoint
         ),
-        sheetHeight: maxSnapPoint,
+        sheetHeight: maxSnapPoint
       };
     }, [_snapPoints, topInset]);
     const initialPosition = useMemo(() => {
@@ -171,12 +171,12 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
         flashScrollableIndicators();
         // @ts-ignore
         contentWrapperGestureRef.current.setNativeProps({
-          maxDeltaY: 0,
+          maxDeltaY: 0
         });
       } else {
         // @ts-ignore
         contentWrapperGestureRef.current.setNativeProps({
-          maxDeltaY: snapPoints[currentPositionIndex],
+          maxDeltaY: snapPoints[currentPositionIndex]
         });
       }
     }, [snapPoints, flashScrollableIndicators]);
@@ -241,7 +241,7 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
         animatedPositionIndex.value,
         animationState,
         handleOnChange,
-        refreshUIElements,
+        refreshUIElements
       ]
     );
 
@@ -253,7 +253,7 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
           point,
           {
             duration: animationDuration,
-            easing: animationEasing,
+            easing: animationEasing
           },
           animateToPointCompleted
         );
@@ -263,7 +263,7 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
         animatedPosition,
         animationDuration,
         animationEasing,
-        animateToPointCompleted,
+        animateToPointCompleted
       ]
     );
 
@@ -310,7 +310,7 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
       snapTo: handleSnapTo,
       expand: handleExpand,
       collapse: handleCollapse,
-      close: handleClose,
+      close: handleClose
     }));
     //#endregion
 
@@ -324,7 +324,7 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
         scrollableContentOffsetY,
         scrollableDecelerationRate,
         setScrollableRef: handleSettingScrollableRef,
-        removeScrollableRef,
+        removeScrollableRef
       }),
       // eslint-disable-next-line react-hooks/exhaustive-deps
       []
@@ -334,7 +334,7 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
         snapTo: handleSnapTo,
         expand: handleExpand,
         collapse: handleCollapse,
-        close: handleClose,
+        close: handleClose
       }),
       [handleSnapTo, handleExpand, handleCollapse, handleClose]
     );
@@ -344,13 +344,13 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
     const contentContainerStyle = useMemo<Animated.AnimateStyle<ViewStyle>>(
       () => ({
         ...styles.container,
-        height: sheetHeight,
+        height: sheetHeight
       }),
       [sheetHeight]
     );
     const contentContainerAnimatedStyle = useAnimatedStyle(() => {
       return {
-        transform: [{ translateY: animatedPosition.value }],
+        transform: [{ translateY: animatedPosition.value }]
       };
     }, []);
     //#endregion

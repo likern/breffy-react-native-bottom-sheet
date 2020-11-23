@@ -1,5 +1,5 @@
 export {
   TouchableOpacity,
   TouchableHighlight,
-  TouchableWithoutFeedback,
+  TouchableWithoutFeedback
 } from 'react-native';

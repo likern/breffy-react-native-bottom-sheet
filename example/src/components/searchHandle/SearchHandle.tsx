@@ -4,7 +4,7 @@ import {
   StyleSheet,
   Dimensions,
   NativeSyntheticEvent,
-  TextInputChangeEventData,
+  TextInputChangeEventData
 } from 'react-native';
 import { useBottomSheet } from '@breeffy/react-native-bottom-sheet';
 import { TextInput } from 'react-native-gesture-handler';
@@ -24,7 +24,7 @@ const BottomSheetHandleComponent = () => {
   // callbacks
   const handleInputChange = useCallback(
     ({
-      nativeEvent: { text },
+      nativeEvent: { text }
     }: NativeSyntheticEvent<TextInputChangeEventData>) => {
       setValue(text);
     },
@@ -56,26 +56,26 @@ const BottomSheetHandle = memo(BottomSheetHandleComponent, isEqual);
 export const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 16,
-    paddingVertical: 5,
+    paddingVertical: 5
   },
   input: {
     marginTop: 5,
     marginBottom: 10,
     borderRadius: 8,
     padding: 6,
-    backgroundColor: 'rgba(151, 151, 151, 0.25)',
+    backgroundColor: 'rgba(151, 151, 151, 0.25)'
   },
   indicator: {
     alignSelf: 'center',
     width: (7.5 * windowWidth) / 100,
     height: 4,
     borderRadius: 4,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)'
   },
   separator: {
     height: 1,
-    backgroundColor: 'rgba(255,255,255,0.125)',
-  },
+    backgroundColor: 'rgba(255,255,255,0.125)'
+  }
 });
 
 export default BottomSheetHandle;

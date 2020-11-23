@@ -4,12 +4,12 @@ import React, {
   useRef,
   useImperativeHandle,
   useEffect,
-  memo,
+  memo
 } from 'react';
 import {
   FlatList as RNFlatList,
   FlatListProps as RNFlatListProps,
-  ViewStyle,
+  ViewStyle
 } from 'react-native';
 import isEqual from 'lodash.isequal';
 import Animated from 'react-native-reanimated';
@@ -18,7 +18,7 @@ import { BottomSheetDraggableView } from '../draggableView';
 import { useScrollableInternal, useBottomSheetInternal } from '../../hooks';
 import type {
   BottomSheetFlatListProps,
-  BottomSheetFlatListType,
+  BottomSheetFlatListType
 } from './types';
 import { styles } from './styles';
 
@@ -44,7 +44,7 @@ const BottomSheetFlatListComponent = forwardRef(
       scrollableRef,
       scrollableAnimatedProps,
       handleScrollEvent,
-      handleSettingScrollable,
+      handleSettingScrollable
     } = useScrollableInternal(BottomSheetFlatListName);
     const { contentWrapperGestureRef } = useBottomSheetInternal();
 

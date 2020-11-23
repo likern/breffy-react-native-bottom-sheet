@@ -9,13 +9,13 @@ export const useScrollableAnimatedProps = () => {
   const {
     animatedPosition,
     animationState,
-    scrollableDecelerationRate,
+    scrollableDecelerationRate
   } = useBottomSheetInternal();
 
   // variables
   const animatedProps = useAnimatedProps(
     () => ({
-      decelerationRate: scrollableDecelerationRate.value,
+      decelerationRate: scrollableDecelerationRate.value
     }),
     []
   );

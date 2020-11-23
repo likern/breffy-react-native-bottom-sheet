@@ -4,12 +4,12 @@ import React, {
   useRef,
   Ref,
   forwardRef,
-  memo,
+  memo
 } from 'react';
 import {
   SectionList as RNSectionList,
   SectionListProps as RNSectionListProps,
-  ViewStyle,
+  ViewStyle
 } from 'react-native';
 import isEqual from 'lodash.isequal';
 import Animated from 'react-native-reanimated';
@@ -18,7 +18,7 @@ import { BottomSheetDraggableView } from '../draggableView';
 import { useScrollableInternal, useBottomSheetInternal } from '../../hooks';
 import type {
   BottomSheetSectionListProps,
-  BottomSheetSectionListType,
+  BottomSheetSectionListType
 } from './types';
 import { styles } from './styles';
 
@@ -44,7 +44,7 @@ const BottomSheetSectionListComponent = forwardRef(
       scrollableRef,
       scrollableAnimatedProps,
       handleScrollEvent,
-      handleSettingScrollable,
+      handleSettingScrollable
     } = useScrollableInternal(BottomSheetSectionListName);
     const { contentWrapperGestureRef } = useBottomSheetInternal();
 

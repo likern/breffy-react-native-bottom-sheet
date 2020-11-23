@@ -18,7 +18,7 @@ const BottomSheetDraggableViewComponent = ({
   // hooks
   const {
     contentWrapperGestureRef,
-    contentPanGestureHandler,
+    contentPanGestureHandler
   } = useBottomSheetInternal();
 
   // variables

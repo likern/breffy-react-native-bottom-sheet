@@ -1,7 +1,7 @@
 import Animated, { useAnimatedGestureHandler } from 'react-native-reanimated';
 import {
   State,
-  TapGestureHandlerGestureEvent,
+  TapGestureHandlerGestureEvent
 } from 'react-native-gesture-handler';
 
 export const useTapGestureHandler = (
@@ -26,7 +26,7 @@ export const useTapGestureHandler = (
       },
       onFinish: ({ state }) => {
         gestureState.value = state;
-      },
+      }
     },
     []
   );

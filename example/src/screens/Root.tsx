@@ -10,43 +10,43 @@ const data = [
     data: [
       {
         name: 'View',
-        slug: 'ViewExample',
+        slug: 'ViewExample'
       },
       {
         name: 'ScrollView',
-        slug: 'ScrollViewExample',
+        slug: 'ScrollViewExample'
       },
       {
         name: 'FlatList',
-        slug: 'FlatListExample',
+        slug: 'FlatListExample'
       },
       {
         name: 'SectionList',
-        slug: 'SectionListExample',
-      },
-    ],
+        slug: 'SectionListExample'
+      }
+    ]
   },
   {
     title: 'Advanced',
     data: [
       {
         name: 'React Navigation',
-        slug: 'NavigatorExample',
+        slug: 'NavigatorExample'
       },
       {
         name: 'Custom Handle',
-        slug: 'CustomHandleExample',
+        slug: 'CustomHandleExample'
       },
       {
         name: 'Shadow Overlay',
-        slug: 'ShadowOverlayExample',
+        slug: 'ShadowOverlayExample'
       },
       {
         name: 'Map',
-        slug: 'MapExample',
-      },
-    ],
-  },
+        slug: 'MapExample'
+      }
+    ]
+  }
 ];
 
 const RootScreen = () => {
@@ -66,7 +66,7 @@ const RootScreen = () => {
       description={description}
       author={{
         username: 'Mo Gorhom',
-        url: 'https://gorhom.dev',
+        url: 'https://gorhom.dev'
       }}
       data={data}
       safeInsets={safeInsets}
