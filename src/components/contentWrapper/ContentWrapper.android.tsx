@@ -17,7 +17,6 @@ const ContentWrapperComponent = forwardRef<
       maxDurationMs={1000000}
       maxDeltaY={maxDeltaY}
       shouldCancelWhenOutside={false}
-      onGestureEvent={handleGestureEvent}
       onHandlerStateChange={handleGestureEvent}
     >
       {children}
