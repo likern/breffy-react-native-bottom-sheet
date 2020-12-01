@@ -2,6 +2,7 @@ import type React from 'react';
 import type Animated from 'react-native-reanimated';
 import type { BottomSheetHandleProps } from '../handle';
 import type { ViewProps } from 'react-native';
+import type { SnapPoint } from '../../types';
 
 export interface BottomSheetProps extends BottomSheetAnimationConfigs {
   /**
@@ -17,7 +18,7 @@ export interface BottomSheetProps extends BottomSheetAnimationConfigs {
    * @example
    * [100, '50%', '90%']
    */
-  snapPoints: Array<string | number>;
+  snapPoints: SnapPoint[];
   /**
    * Top inset value helps to calculate percentage snap points values. usually comes from `@react-navigation/stack` hook `useHeaderHeight` or from `react-native-safe-area-context` hook `useSafeArea`.
    * @type number
