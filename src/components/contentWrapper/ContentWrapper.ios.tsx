@@ -1,28 +1,22 @@
-import React, { forwardRef, memo, useMemo } from 'react';
+import React, { forwardRef, memo } from 'react';
 import isEqual from 'lodash.isequal';
 import Animated from 'react-native-reanimated';
-import { TapGestureHandler } from 'react-native-gesture-handler';
+import { State, TapGestureHandler } from 'react-native-gesture-handler';
 import { useTapGestureHandler } from '../../hooks/useTapGestureHandler';
-import type { BottomSheetContentWrapperProps } from './types';
 import { styles } from './styles';
+
+export type ContentWrapperComponentProps = {
+  gestureState: Animated.SharedValue<State>;
+  maxDeltaY: number;
+  children: React.ReactNode;
+};
 
 const ContentWrapperComponent = forwardRef<
   TapGestureHandler,
-  BottomSheetContentWrapperProps
->(({ gestureState, maxDeltaY, height, children }, ref) => {
+  ContentWrapperComponentProps
+>(({ gestureState, maxDeltaY, children }, ref) => {
   // callbacks
   const handleGestureEvent = useTapGestureHandler(gestureState);
-
-  // styles
-  const containerStyle = useMemo(
-    () => [
-      styles.container,
-      {
-        height
-      }
-    ],
-    [height]
-  );
 
   return (
     <TapGestureHandler
@@ -32,7 +26,7 @@ const ContentWrapperComponent = forwardRef<
       shouldCancelWhenOutside={false}
       onHandlerStateChange={handleGestureEvent}
     >
-      <Animated.View pointerEvents="box-none" style={containerStyle}>
+      <Animated.View pointerEvents="box-none" style={styles.container}>
         {children}
       </Animated.View>
     </TapGestureHandler>

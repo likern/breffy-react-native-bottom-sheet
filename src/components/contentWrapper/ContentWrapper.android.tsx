@@ -1,12 +1,18 @@
 import React, { forwardRef, memo } from 'react';
 import isEqual from 'lodash.isequal';
-import { TapGestureHandler } from 'react-native-gesture-handler';
+import { State, TapGestureHandler } from 'react-native-gesture-handler';
 import { useTapGestureHandler } from '../../hooks/useTapGestureHandler';
-import type { BottomSheetContentWrapperProps } from './types';
+import Animated from 'react-native-reanimated';
+
+export type ContentWrapperComponentProps = {
+  gestureState: Animated.SharedValue<State>;
+  maxDeltaY: number;
+  children: React.ReactNode;
+};
 
 const ContentWrapperComponent = forwardRef<
   TapGestureHandler,
-  BottomSheetContentWrapperProps
+  ContentWrapperComponentProps
 >(({ gestureState, maxDeltaY, children }, ref) => {
   // callbacks
   const handleGestureEvent = useTapGestureHandler(gestureState);
