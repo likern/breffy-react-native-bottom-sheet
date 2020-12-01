@@ -3825,10 +3825,10 @@ react-native-maps@^0.27.1:
   resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-0.27.1.tgz#2f10cd417bb2fd938c9e015b1c9b6d9b1a44b97f"
   integrity sha512-HygBkZBecTnIVRYrSiLRAvu4OmXOYso/A7c6Cy73HkOh9CgGV8Ap5eBea24tvmFGptjj5Hg8AJ94/YbmWK1Okw==
 
-react-native-reanimated@^2.0.0-alpha.9:
-  version "2.0.0-alpha.9.1"
-  resolved "https://registry.yarnpkg.com/react-native-reanimated/-/react-native-reanimated-2.0.0-alpha.9.1.tgz#d98626792b764440d99cf1f53d61aab1e0f6e4f2"
-  integrity sha512-JkQUjZp+GIGuzpIoTHZ/uO/p+rWw8d4/LLwqdgC9QfOXCffmM5LWEARk+cBqqwdt20kPedznjhaRZo5TOWBm4A==
+react-native-reanimated@^2.0.0-rc.0:
+  version "2.0.0-rc.0"
+  resolved "https://registry.yarnpkg.com/react-native-reanimated/-/react-native-reanimated-2.0.0-rc.0.tgz#7a1b0bfd48e3de9dfa985a524463b6a216531358"
+  integrity sha512-v+SMpeSxQ8kO116B5q3/D6VlFSot4eIRASw0nxxU+6zh9wb4W8shMyQi7/ag/gt246FvjBZOPwxsBS2iTcw8Zg==
   dependencies:
     "@babel/plugin-transform-object-assign" "^7.10.4"
     fbjs "^3.0.0"
@@ -3968,6 +3968,11 @@ regjsparser@^0.6.4:
   integrity sha512-64O87/dPDgfk8/RQqC4gkZoGyyWFIEUTTh80CU6CWuK5vkCGyekIx+oKcEIYtP/RAxSQltCZHCNu/mdd7fqlJw==
   dependencies:
     jsesc "~0.5.0"
+
+remeda@^0.0.27:
+  version "0.0.27"
+  resolved "https://registry.yarnpkg.com/remeda/-/remeda-0.0.27.tgz#5924d656c5f8e9c7c692324cd7f4c43ce8552997"
+  integrity sha512-nkQnPLMXtSirvF8OxjuvbZhwBawDD6ZQAvg7hiq4/nZEFIgB4u80fS/NUm6PMJgSUfwfzQ6ZwVyVn8DTJcmkCw==
 
 remove-trailing-separator@^1.0.1:
   version "1.1.0"

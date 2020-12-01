@@ -41,7 +41,8 @@
   "dependencies": {
     "invariant": "^2.2.4",
     "lodash.isequal": "^4.5.0",
-    "react-native-redash": "^15.11.1"
+    "react-native-redash": "^15.11.1",
+    "remeda": "^0.0.27"
   },
   "devDependencies": {
     "@commitlint/cli": "^9.1.1",
@@ -66,7 +67,7 @@
     "react": "=16.13.1",
     "react-native": "^0.63.3",
     "react-native-gesture-handler": "^1.7.0",
-    "react-native-reanimated": "^2.0.0-alpha.9",
+    "react-native-reanimated": "^2.0.0-rc.0",
     "release-it": "^13.6.5",
     "typescript": "^4.1.2"
   },
@@ -74,7 +75,7 @@
     "react": ">=16.13.1",
     "react-native": ">=0.63.3",
     "react-native-gesture-handler": ">=1.7.0",
-    "react-native-reanimated": ">=2.0.0-alpha.9"
+    "react-native-reanimated": ">=2.0.0-rc.0"
   },
   "husky": {
     "hooks": {
