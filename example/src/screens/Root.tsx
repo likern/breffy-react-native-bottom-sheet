@@ -27,6 +27,27 @@ const data = [
     ]
   },
   {
+    title: 'Dynamic',
+    data: [
+      {
+        name: 'View',
+        slug: 'ViewDynamicExample'
+      },
+      {
+        name: 'ScrollView',
+        slug: 'ScrollViewDynamicExample'
+      },
+      {
+        name: 'FlatList',
+        slug: 'FlatListDynamicExample'
+      },
+      {
+        name: 'SectionList',
+        slug: 'SectionListDynamicExample'
+      }
+    ]
+  },
+  {
     title: 'Advanced',
     data: [
       {
