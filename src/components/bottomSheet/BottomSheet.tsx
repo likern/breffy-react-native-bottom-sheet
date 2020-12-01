@@ -28,9 +28,9 @@ import {
 import {
   useInteractivePanGestureHandler,
   useStableCallback,
-  useScrollable
+  useScrollable,
+  useSnapPoints
 } from '../../hooks';
-import { normalizeSnapPoints } from '../../utilities';
 import {
   BottomSheetInternalProvider,
   BottomSheetProvider
@@ -136,21 +136,28 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
       flashScrollableIndicators
     } = useScrollable();
 
-    // normalize snap points
-    const { snapPoints, sheetHeight } = useMemo(() => {
-      const normalizedSnapPoints = normalizeSnapPoints(_snapPoints, topInset);
-      const maxSnapPoint =
-        normalizedSnapPoints[normalizedSnapPoints.length - 1];
-      return {
-        snapPoints: normalizedSnapPoints.map(
-          normalizedSnapPoint => maxSnapPoint - normalizedSnapPoint
-        ),
-        sheetHeight: maxSnapPoint
-      };
-    }, [_snapPoints, topInset]);
+    const {
+      snapPoints,
+      sheetHeight,
+      onContentLayout,
+      isWaitingLayout
+    } = useSnapPoints(_snapPoints, topInset);
+
+    // console.log(
+    //   `snapPoints: ${JSON.stringify(
+    //     snapPoints
+    //   )}, sheetHeight: ${sheetHeight}, isWaitingLayout: ${isWaitingLayout}`
+    // );
+
+    // console.log(
+    //   `initialSnapIndex: ${initialSnapIndex}, currentPositionIndexRef: ${currentPositionIndexRef.current}`
+    // );
+
     const initialPosition = useMemo(() => {
-      return initialSnapIndex < 0 ? sheetHeight : snapPoints[initialSnapIndex];
-    }, [initialSnapIndex, sheetHeight, snapPoints]);
+      return initialSnapIndex < 0 || isWaitingLayout
+        ? sheetHeight
+        : snapPoints[initialSnapIndex];
+    }, [initialSnapIndex, sheetHeight, snapPoints, isWaitingLayout]);
 
     // content wrapper
     const contentWrapperGestureRef = useRef<TapGestureHandler>(null);
@@ -202,22 +209,37 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
     //#region gesture interaction / animation
     // variables
     const animationState = useSharedValue(ANIMATION_STATE.UNDETERMINED);
+    // console.log(`initialPosition: ${initialPosition}`);
     const animatedPosition = useSharedValue(initialPosition);
-    const animatedPositionIndex = useDerivedValue(
-      () =>
-        interpolate(
-          animatedPosition.value,
-          [sheetHeight].concat(snapPoints.slice().reverse()),
-          [-1].concat(
-            snapPoints
-              .slice()
-              .map((_, index) => index)
-              .reverse()
-          ),
-          Extrapolate.CLAMP
-        ),
-      [snapPoints, sheetHeight]
-    );
+    const animatedPositionIndex = useDerivedValue(() => {
+      const input = isWaitingLayout
+        ? [sheetHeight, sheetHeight]
+        : [sheetHeight].concat(snapPoints.slice());
+      // console.log(`input: ${input}, typeof input: ${typeof input}`);
+
+      const output = isWaitingLayout
+        ? [-1, -1]
+        : [-1].concat(snapPoints.slice().map((_, index) => index));
+      // console.log(`output: ${output}, typeof output: ${typeof output}`);
+      const interpolatedIndex = interpolate(
+        animatedPosition.value,
+        input,
+        output,
+        Extrapolate.CLAMP
+      );
+
+      // console.log(
+      //   `interpolatedIndex: ${interpolatedIndex}, input: ${input}, output: ${output}`
+      // );
+      return interpolatedIndex;
+    }, [snapPoints, sheetHeight, isWaitingLayout]);
+
+    // useDerivedValue(() => {
+    //   console.log(
+    //     `animatedPosition: ${animatedPosition.value}, animatedPositionIndex: ${animatedPositionIndex.value}`
+    //   );
+    //   return animatedPosition.value;
+    // }, []);
 
     // callbacks
     const animateToPointCompleted = useCallback(
@@ -316,18 +338,21 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
 
     //#region contexts variables
     const internalContextVariables = useMemo(
-      () => ({
-        animatedPosition,
-        animationState,
-        contentWrapperGestureRef,
-        contentPanGestureHandler,
-        scrollableContentOffsetY,
-        scrollableDecelerationRate,
-        setScrollableRef: handleSettingScrollableRef,
-        removeScrollableRef
-      }),
+      () => {
+        // console.log(`internalContextVariables is updated!`);
+        return {
+          animatedPosition,
+          animationState,
+          contentWrapperGestureRef,
+          contentPanGestureHandler,
+          scrollableContentOffsetY,
+          scrollableDecelerationRate,
+          setScrollableRef: handleSettingScrollableRef,
+          removeScrollableRef
+        };
+      },
       // eslint-disable-next-line react-hooks/exhaustive-deps
-      []
+      [contentPanGestureHandler]
     );
     const externalContextVariables = useMemo(
       () => ({
@@ -343,10 +368,9 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
     //#region styles
     const contentContainerStyle = useMemo<Animated.AnimateStyle<ViewStyle>>(
       () => ({
-        ...styles.container,
-        height: sheetHeight
+        ...styles.container
       }),
-      [sheetHeight]
+      []
     );
     const contentContainerAnimatedStyle = useAnimatedStyle(() => {
       return {
@@ -375,13 +399,15 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
     //#endregion
 
     // render
+    // console.log(
+    //   `[ContentWrapper] maxDeltaY: ${contentWrapperMaxDeltaY}, height: ${sheetHeight}`
+    // );
     return (
       <>
         <ContentWrapper
           ref={contentWrapperGestureRef}
           gestureState={contentWrapperGestureState}
           maxDeltaY={contentWrapperMaxDeltaY}
-          height={sheetHeight}
         >
           <Animated.View
             style={[contentContainerStyle, contentContainerAnimatedStyle]}
@@ -403,7 +429,10 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
               </PanGestureHandler>
 
               <BottomSheetInternalProvider value={internalContextVariables}>
-                <BottomSheetDraggableView style={styles.contentContainer}>
+                <BottomSheetDraggableView
+                  style={[styles.contentContainer]}
+                  onLayout={onContentLayout}
+                >
                   {typeof children === 'function'
                     ? (children as Function)()
                     : children}
@@ -412,29 +441,6 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
             </BottomSheetProvider>
           </Animated.View>
         </ContentWrapper>
-        {/* <DebugView
-          values={{
-            contentWrapperTapState: contentWrapperTapGestureState,
-            contentPanState: contentPanGestureState,
-            lastActiveGesture,
-            animatedPosition,
-          }}
-        /> */}
-
-        {/* {_animatedPosition && (
-          <Animated.Code
-            exec={set(
-              _animatedPosition,
-              sub(sheetHeight, animatedPosition.value)
-            )}
-          />
-        )}
-
-        {_animatedPositionIndex && (
-          <Animated.Code
-            exec={set(_animatedPositionIndex, animatedPositionIndex)}
-          />
-        )} */}
       </>
     );
   }
