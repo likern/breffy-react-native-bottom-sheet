@@ -1,5 +1,17 @@
 import type { FlatList, ScrollView, SectionList } from 'react-native';
 
+interface SnapPointWindow {
+  relativeTo: 'window';
+  percentagesOf: number;
+}
+
+interface SnapPointContent {
+  relativeTo: 'content';
+  percentagesOf: number;
+}
+
+export type SnapPoint = SnapPointWindow | SnapPointContent;
+
 export type BottomSheetMethods = {
   /**
    * Snap to one of the provided points from `snapPoints`.
