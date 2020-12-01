@@ -11,7 +11,11 @@ import {
   NavigatorExample,
   CustomHandleExample,
   ShadowOverlayExample,
-  MapExample
+  MapExample,
+  FlatListDynamicExampleScreen,
+  ScrollViewDynamicExampleScreen,
+  SectionListDynamicExampleScreen,
+  ViewDynamicExampleScreen
 } from './screens';
 
 const Stack = createStackNavigator<AppStackParamsList>();
@@ -38,6 +42,23 @@ function App() {
           component={ScrollViewExampleScreen}
         />
         <Stack.Screen name="ViewExample" component={ViewExampleScreen} />
+        {/* dynamic examples */}
+        <Stack.Screen
+          name="FlatListDynamicExample"
+          component={FlatListDynamicExampleScreen}
+        />
+        <Stack.Screen
+          name="SectionListDynamicExample"
+          component={SectionListDynamicExampleScreen}
+        />
+        <Stack.Screen
+          name="ScrollViewDynamicExample"
+          component={ScrollViewDynamicExampleScreen}
+        />
+        <Stack.Screen
+          name="ViewDynamicExample"
+          component={ViewDynamicExampleScreen}
+        />
         {/* advanced examples */}
         <Stack.Screen name="NavigatorExample" component={NavigatorExample} />
         <Stack.Screen
