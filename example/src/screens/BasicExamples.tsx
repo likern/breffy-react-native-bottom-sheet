@@ -1,6 +1,6 @@
 import React, { useCallback, memo, useRef, useMemo } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { BottomSheet } from '@breeffy/react-native-bottom-sheet';
+import { BottomSheet, SnapPoint } from '@breeffy/react-native-bottom-sheet';
 import ContactList from '../components/contactList';
 import Button from '../components/button';
 import { useHeaderHeight } from '@react-navigation/stack';
@@ -18,7 +18,14 @@ const createExampleScreen = ({ type, count = 50 }: ExampleScreenProps) =>
     const headerHeight = useHeaderHeight();
 
     // variables
-    const snapPoints = useMemo(() => ['25%', '50%', '90%'], []);
+    const snapPoints = useMemo<SnapPoint[]>(
+      () => [
+        { relativeTo: 'window', percentagesOf: 25 },
+        { relativeTo: 'window', percentagesOf: 50 },
+        { relativeTo: 'window', percentagesOf: 90 }
+      ],
+      []
+    );
 
     // callbacks
     const handleSheetChange = useCallback(index => {

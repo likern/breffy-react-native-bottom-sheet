@@ -9,6 +9,7 @@ import {
 } from '@react-navigation/stack';
 import {
   BottomSheet,
+  SnapPoint,
   TouchableOpacity
 } from '@breeffy/react-native-bottom-sheet';
 import Button from '../components/button';
@@ -78,7 +79,14 @@ const NavigatorExample = () => {
   const headerHeight = useHeaderHeight();
 
   // variables
-  const snapPoints = useMemo(() => ['25%', '50%', '90%'], []);
+  const snapPoints = useMemo<SnapPoint[]>(
+    () => [
+      { relativeTo: 'window', percentagesOf: 25 },
+      { relativeTo: 'window', percentagesOf: 50 },
+      { relativeTo: 'window', percentagesOf: 90 }
+    ],
+    []
+  );
 
   // callbacks
   const handleSheetChange = useCallback(index => {
