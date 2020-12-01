@@ -15,3 +15,4 @@ export const {
 export type { BottomSheetHandleProps } from './components/handle';
 
 export { useBottomSheet } from './hooks/useBottomSheet';
+export type { SnapPoint } from './types';
