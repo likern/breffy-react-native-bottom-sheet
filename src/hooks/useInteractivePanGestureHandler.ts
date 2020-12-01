@@ -1,7 +1,8 @@
 import Animated, {
   useAnimatedGestureHandler,
   useSharedValue,
-  cancelAnimation
+  cancelAnimation,
+  useDerivedValue
 } from 'react-native-reanimated';
 import {
   State,
@@ -30,6 +31,10 @@ export const useInteractivePanGestureHandler = (
   const gestureTranslationY = useSharedValue(0);
   const gestureVelocityY = useSharedValue(0);
 
+  const animatedSnapPoints = useDerivedValue(() => {
+    return snapPoints;
+  }, [snapPoints]);
+
   const gestureHandler = useAnimatedGestureHandler<
     PanGestureHandlerGestureEvent,
     InteractivePanGestureHandlerContextType
@@ -57,8 +62,8 @@ export const useInteractivePanGestureHandler = (
             translationY +
             (offset && context.lastAnimatedPosition === 0 ? offset.value : 0) *
               -1,
-          snapPoints[snapPoints.length - 1],
-          snapPoints[0]
+          animatedSnapPoints.value[animatedSnapPoints.value.length - 1],
+          animatedSnapPoints.value[0]
         );
       },
       onEnd: ({ state }, context) => {
@@ -74,7 +79,7 @@ export const useInteractivePanGestureHandler = (
           snapPoint(
             gestureTranslationY.value + context.lastAnimatedPosition,
             gestureVelocityY.value,
-            snapPoints
+            animatedSnapPoints.value
           )
         );
       }
