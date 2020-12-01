@@ -10,6 +10,7 @@ const BottomSheetDraggableViewComponent = ({
   nativeGestureRef,
   style,
   children,
+  onLayout,
   ...rest
 }: BottomSheetDraggableViewProps) => {
   // refs
@@ -43,7 +44,7 @@ const BottomSheetDraggableViewComponent = ({
       shouldCancelWhenOutside={false}
       onGestureEvent={contentPanGestureHandler}
     >
-      <Animated.View style={containerStyle} {...rest}>
+      <Animated.View style={containerStyle} {...rest} onLayout={onLayout}>
         {children}
       </Animated.View>
     </PanGestureHandler>
