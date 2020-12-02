@@ -4,6 +4,7 @@ import { BottomSheet, SnapPoint } from '@breeffy/react-native-bottom-sheet';
 import ContactList from '../components/contactList';
 import Button from '../components/button';
 import { useHeaderHeight } from '@react-navigation/stack';
+// import { useDerivedValue, useSharedValue } from 'react-native-reanimated';
 
 interface ExampleScreenProps {
   title: string;
@@ -16,6 +17,16 @@ const createExampleScreen = ({ type, count = 50 }: ExampleScreenProps) =>
     // hooks
     const bottomSheetRef = useRef<BottomSheet>(null);
     const headerHeight = useHeaderHeight();
+
+    // TODO: Uncomment to see infinite printing to console
+    // const animatedPosition = useSharedValue<number>(0);
+    // const animatedPositionIndex = useSharedValue<number>(0);
+    // const _res = useDerivedValue(() => {
+    //   console.log(
+    //     `[BottomSheet] animatedPosition: ${animatedPosition.value}, animatedPositionIndex: ${animatedPositionIndex.value}`
+    //   );
+    //   return animatedPosition.value;
+    // }, []);
 
     // variables
     const snapPoints = useMemo<SnapPoint[]>(
@@ -85,6 +96,9 @@ const createExampleScreen = ({ type, count = 50 }: ExampleScreenProps) =>
           snapPoints={snapPoints}
           initialSnapIndex={1}
           topInset={headerHeight}
+          // TODO: Uncomment to see bug
+          // animatedPosition={animatedPosition}
+          // animatedPositionIndex={animatedPositionIndex}
           onChange={handleSheetChange}
         >
           <ContactList key={`${type}.list`} type={type} count={count} />
