@@ -36,7 +36,8 @@
     "copy-dts": "copyfiles -u 1 \"src/**/*.d.ts\" lib/typescript",
     "release": "release-it",
     "example": "yarn --cwd example",
-    "bootstrap": "yarn install && yarn example"
+    "bootstrap": "yarn install && yarn example",
+    "prepack": "yarn build"
   },
   "dependencies": {
     "invariant": "^2.2.4",
