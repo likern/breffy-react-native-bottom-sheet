@@ -229,11 +229,12 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
       );
 
       // console.log(
-      //   `interpolatedIndex: ${interpolatedIndex}, input: ${input}, output: ${output}`
+      //   `animatedPositionIndex: animatedPosition: ${animatedPosition.value}, interpolatedIndex: ${interpolatedIndex}, input: ${input}, output: ${output}`
       // );
       return interpolatedIndex;
     }, [snapPoints, sheetHeight, isWaitingLayout]);
 
+    // TODO: Uncomment this to watch on animatedPosition
     // useDerivedValue(() => {
     //   console.log(
     //     `animatedPosition: ${animatedPosition.value}, animatedPositionIndex: ${animatedPositionIndex.value}`
@@ -381,20 +382,25 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
 
     //#region effects
     useAnimatedReaction(
-      () => (_animatedPosition ? animatedPosition.value : null),
+      () => (_animatedPosition !== undefined ? animatedPosition.value : null),
       (value: number | null) => {
-        if (value) {
+        if (value !== null) {
           _animatedPosition!.value = value;
         }
-      }
+      },
+      []
     );
     useAnimatedReaction(
-      () => (_animatedPositionIndex ? animatedPositionIndex.value : null),
+      () =>
+        _animatedPositionIndex !== undefined
+          ? animatedPositionIndex.value
+          : null,
       (value: number | null) => {
-        if (value) {
+        if (value !== null) {
           _animatedPositionIndex!.value = value;
         }
-      }
+      },
+      []
     );
     //#endregion
 
