@@ -16,8 +16,8 @@ jobs:
       with:
         result-encoding: string
         script: |
-          if (!['patch', 'minor', 'major'].includes(${{ github.event.inputs.version }})) {
-            core.setFailed('Provided version is not patch, minor or major')
+          if (!['patch', 'minor', 'major'].includes('${{ github.event.inputs.version }}')) {
+            core.setFailed('Provided version ${{ github.event.inputs.version }} is not patch, minor or major')
           }
     - name: Check input version
       run: exit 1
