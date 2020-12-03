@@ -382,25 +382,22 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
 
     //#region effects
     useAnimatedReaction(
-      () => (_animatedPosition !== undefined ? animatedPosition.value : null),
-      (value: number | null) => {
-        if (value !== null) {
-          _animatedPosition!.value = value;
+      () => animatedPosition.value,
+      (value: number) => {
+        if (_animatedPosition !== undefined) {
+          _animatedPosition.value = value;
         }
       },
-      []
+      [_animatedPosition]
     );
     useAnimatedReaction(
-      () =>
-        _animatedPositionIndex !== undefined
-          ? animatedPositionIndex.value
-          : null,
-      (value: number | null) => {
-        if (value !== null) {
-          _animatedPositionIndex!.value = value;
+      () => animatedPositionIndex.value,
+      (value: number) => {
+        if (_animatedPositionIndex !== undefined) {
+          _animatedPositionIndex.value = value;
         }
       },
-      []
+      [_animatedPositionIndex]
     );
     //#endregion
 
