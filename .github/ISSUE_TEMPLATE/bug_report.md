@@ -24,12 +24,12 @@ assignees: ''
   Please provide the version of the libraries below.
 -->
 
-| Library                         | Version |
-| ------------------------------- | ------- |
-| @gorhom/bottom-sheet         | x.x.x   |
-| react-native                    | x.x.x   |
-| react-native-reanimated         | x.x.x   |
-| react-native-gesture-handler    | x.x.x   |
+| Library                            | Version |
+| ---------------------------------- | ------- |
+| @breeffy/react-native-bottom-sheet | x.x.x   |
+| react-native                       | x.x.x   |
+| react-native-reanimated            | x.x.x   |
+| react-native-gesture-handler       | x.x.x   |
 
 ## Steps To Reproduce
 
