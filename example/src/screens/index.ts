@@ -14,4 +14,5 @@ export {
 export { NavigatorExample } from './NavigatorExample';
 export { CustomHandleExample } from './CustomHandleExample';
 export { ShadowOverlayExample } from './ShadowOverlayExample';
+export { SwipeToCloseExample } from './SwipeToCloseExample';
 export { MapExample } from './MapExample';
