@@ -11,8 +11,16 @@ jobs:
   release-package:
     runs-on: ubuntu-latest
     steps:
+    - name: GitHub Script
+      uses: actions/github-script@v3.1.0
+      with:
+        result-encoding: string
+        script: |
+          if (!['patch', 'minor', 'major'].includes(${{ github.event.inputs.version }})) {
+            core.setFailed('Provided version is not patch, minor or major')
+          }
     - name: Check input version
-      run: exit ${{ github.event.inputs.version != 'patch' && github.event.inputs.version != 'minor' && github.event.inputs.version != 'major' }}
+      run: exit 1
     - name: Checkout source code
       uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f
     - name: Setup Node.js
