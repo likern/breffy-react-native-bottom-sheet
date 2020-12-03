@@ -65,7 +65,8 @@ const data = [
       {
         name: 'Map',
         slug: 'MapExample'
-      }
+      },
+      { name: 'Swipe to Close', slug: 'SwipeToCloseExample' }
     ]
   }
 ];

@@ -13,4 +13,5 @@ export type AppStackParamsList = {
   SectionListDynamicExample: undefined;
   ScrollViewDynamicExample: undefined;
   ViewDynamicExample: undefined;
+  SwipeToCloseExample: undefined;
 };

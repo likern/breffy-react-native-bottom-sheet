@@ -15,7 +15,8 @@ import {
   FlatListDynamicExampleScreen,
   ScrollViewDynamicExampleScreen,
   SectionListDynamicExampleScreen,
-  ViewDynamicExampleScreen
+  ViewDynamicExampleScreen,
+  SwipeToCloseExample
 } from './screens';
 
 const Stack = createStackNavigator<AppStackParamsList>();
@@ -75,6 +76,10 @@ function App() {
           options={{
             headerShown: false
           }}
+        />
+        <Stack.Screen
+          name="SwipeToCloseExample"
+          component={SwipeToCloseExample}
         />
       </Stack.Navigator>
     </NavigationContainer>
