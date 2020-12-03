@@ -1,6 +1,6 @@
 {
   "name": "@breeffy/react-native-bottom-sheet",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Blazingly performant interactive bottom sheet with snap points support powered by Reanimated 2 🌟 🎉",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
