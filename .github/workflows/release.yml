@@ -6,18 +6,33 @@ on:
         description: 'patch, minor or major version'
         required: true
         default: 'patch'
+      draft:
+        description: 'github release type: true or false'
+        required: true
+        default: 'true'
 
 jobs:
   release-package:
     runs-on: ubuntu-latest
     steps:
-    - name: Check workflow input
+    - name: Check version input
       uses: actions/github-script@v3.1.0
       with:
         result-encoding: string
         script: |
           if (!['patch', 'minor', 'major'].includes('${{ github.event.inputs.version }}')) {
             core.setFailed('input version [${{ github.event.inputs.version }}] is not "patch", "minor" or "major"')
+          }
+    - name: Check draft input
+      id: draft-option
+      uses: actions/github-script@v3.1.0
+      with:
+        result-encoding: string
+        script: |
+          if (!['true', 'false'].includes('${{ github.event.inputs.draft }}')) {
+            core.setFailed('input draft [${{ github.event.inputs.draft }}] is not "true" or "false"')
+          } else {
+            return '${{ github.event.inputs.draft }}' === 'true' ? '--github.draft' : '--no-github.draft'
           }
     - name: Checkout source code
       uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f
@@ -30,7 +45,7 @@ jobs:
     - name: Install dependencies
       run: yarn install --frozen-lockfile --non-interactive
     - name: Create release
-      run: yarn release -- ${{ github.event.inputs.version }} --ci
+      run: yarn release -- ${{ github.event.inputs.version }} ${{steps.draft-option.outputs.result}} --ci
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Publish to NPM Registry
