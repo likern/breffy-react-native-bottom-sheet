@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { BottomSheetHandleProps } from '@breeffy/react-native-bottom-sheet';
 import Animated, {
   Extrapolate,
@@ -11,10 +11,16 @@ import { toRad } from 'react-native-redash';
 import { transformOrigin } from '../../utilities/transformOrigin';
 
 interface HandleProps extends BottomSheetHandleProps {
-  style?: StyleProp<ViewStyle>;
+  animatedPositionIndex: Animated.SharedValue<number>;
 }
 
-const Handle: React.FC<HandleProps> = ({ style, animatedPositionIndex }) => {
+const Handle = ({
+  containerStyle,
+  indicatorStyle,
+  animatedContainerStyle,
+  animatedIndicatorStyle,
+  animatedPositionIndex
+}: HandleProps) => {
   const indicatorTransformOriginY = useDerivedValue(() =>
     interpolate(
       animatedPositionIndex.value,
@@ -24,7 +30,9 @@ const Handle: React.FC<HandleProps> = ({ style, animatedPositionIndex }) => {
     )
   );
 
-  const containerStyle = useMemo(() => [styles.header, style], [style]);
+  const containerStyles = useMemo(() => [styles.header, containerStyle], [
+    containerStyle
+  ]);
   const containerAnimatedStyle = useAnimatedStyle(() => {
     const borderTopRadius = interpolate(
       animatedPositionIndex.value,
@@ -93,18 +101,30 @@ const Handle: React.FC<HandleProps> = ({ style, animatedPositionIndex }) => {
   // render
   return (
     <Animated.View
-      style={[containerStyle, containerAnimatedStyle]}
+      style={[containerStyles, containerAnimatedStyle, animatedContainerStyle]}
       renderToHardwareTextureAndroid={true}
     >
-      <Animated.View style={[leftIndicatorStyle, leftIndicatorAnimatedStyle]} />
       <Animated.View
-        style={[rightIndicatorStyle, rightIndicatorAnimatedStyle]}
+        style={[
+          leftIndicatorStyle,
+          indicatorStyle,
+          leftIndicatorAnimatedStyle,
+          animatedIndicatorStyle
+        ]}
+      />
+      <Animated.View
+        style={[
+          rightIndicatorStyle,
+          indicatorStyle,
+          rightIndicatorAnimatedStyle,
+          animatedIndicatorStyle
+        ]}
       />
     </Animated.View>
   );
 };
 
-export default Handle;
+export { Handle };
 
 const styles = StyleSheet.create({
   header: {

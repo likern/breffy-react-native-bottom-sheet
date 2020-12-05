@@ -1,16 +1,32 @@
 import React, { memo } from 'react';
-import { View } from 'react-native';
+import { StyleProp, ViewStyle } from 'react-native';
 import isEqual from 'lodash.isequal';
 import { styles } from './styles';
+import Animated from 'react-native-reanimated';
 
-const BottomSheetHandleComponent = () => {
+export interface BottomSheetHandleProps {
+  containerStyle?: StyleProp<ViewStyle>;
+  indicatorStyle?: StyleProp<ViewStyle>;
+  animatedContainerStyle?: Animated.AnimatedStyleProp<ViewStyle>;
+  animatedIndicatorStyle?: Animated.AnimatedStyleProp<ViewStyle>;
+}
+
+const BottomSheetHandleComponent = ({
+  containerStyle,
+  indicatorStyle,
+  animatedContainerStyle,
+  animatedIndicatorStyle
+}: BottomSheetHandleProps) => {
   return (
-    <View style={styles.container} shouldRasterizeIOS={true}>
-      <View style={styles.indicator} />
-    </View>
+    <Animated.View
+      style={[styles.container, containerStyle, animatedContainerStyle]}
+      shouldRasterizeIOS={true}
+    >
+      <Animated.View
+        style={[styles.indicator, indicatorStyle, animatedIndicatorStyle]}
+      />
+    </Animated.View>
   );
 };
 
-const BottomSheetHandle = memo(BottomSheetHandleComponent, isEqual);
-
-export default BottomSheetHandle;
+export const BottomSheetHandle = memo(BottomSheetHandleComponent, isEqual);

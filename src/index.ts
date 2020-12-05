@@ -12,7 +12,7 @@ export const {
   TouchableWithoutFeedback
 } = BottomSheetTouchable;
 
-export type { BottomSheetHandleProps } from './components/handle';
+export { BottomSheetHandle, BottomSheetHandleProps } from './components/handle';
 
 export { useBottomSheet } from './hooks/useBottomSheet';
 export type { SnapPoint } from './types';

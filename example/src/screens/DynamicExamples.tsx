@@ -17,8 +17,6 @@ const createExampleScreen = ({ type, count = 50 }: ExampleScreenProps) =>
     const bottomSheetRef = useRef<BottomSheet>(null);
     const headerHeight = useHeaderHeight();
 
-    // TODO: Uncomment to see infinite printing to console
-
     // variables
     const snapPoints = useMemo<SnapPoint[]>(
       () => [

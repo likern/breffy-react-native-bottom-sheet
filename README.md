@@ -90,8 +90,8 @@ const App = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 24,
-  },
+    padding: 24
+  }
 });
 
 export default App;
@@ -145,7 +145,7 @@ Animated shared value to be used as a callback for the position index node inter
 
 Component to be placed as a sheet handle.
 
-> `required:` NO | `type:` React.FC<[BottomSheetHandleProps](./src/components/handle/types.d.ts)>
+> `required:` NO | `type:` () => JSX.Element
 
 #### `backgroundComponent`
 

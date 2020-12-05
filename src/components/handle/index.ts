@@ -1,2 +1,1 @@
-export { default } from './Handle';
-export type { BottomSheetHandleProps } from './types';
+export { BottomSheetHandle, BottomSheetHandleProps } from './Handle';

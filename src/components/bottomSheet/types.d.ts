@@ -1,6 +1,5 @@
 import type React from 'react';
 import type Animated from 'react-native-reanimated';
-import type { BottomSheetHandleProps } from '../handle';
 import type { ViewProps } from 'react-native';
 import type { SnapPoint } from '../../types';
 
@@ -36,10 +35,9 @@ export interface BottomSheetProps extends BottomSheetAnimationConfigs {
   animatedPositionIndex?: Animated.SharedValue<number>;
   /**
    * Component to be placed as a sheet handle.
-   * @see {BottomSheetHandleProps}
-   * @type React.FC\<BottomSheetHandleProps\>
+   * @type () => JSX.Element
    */
-  handleComponent?: React.FC<BottomSheetHandleProps>;
+  handleComponent?: () => JSX.Element;
   /**
    * Component to be placed as a background.
    * @type React.FC\<ViewProps\>

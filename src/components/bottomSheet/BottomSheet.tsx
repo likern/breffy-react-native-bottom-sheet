@@ -43,7 +43,7 @@ import {
 } from '../../constants';
 import ContentWrapper from '../contentWrapper';
 import { BottomSheetDraggableView } from '../draggableView';
-import Handle from '../handle';
+import { BottomSheetHandle } from '../handle';
 import type { ScrollableRef, BottomSheetMethods } from '../../types';
 import type { BottomSheetProps } from './types';
 import { styles } from './styles';
@@ -70,7 +70,7 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
       // callbacks
       onChange: _onChange,
       // components
-      handleComponent: HandleComponent = Handle,
+      handleComponent: HandleComponent = BottomSheetHandle,
       backgroundComponent: BackgroundComponent = null,
       children
     },
@@ -223,8 +223,8 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
       // console.log(`output: ${output}, typeof output: ${typeof output}`);
       const interpolatedIndex = interpolate(
         animatedPosition.value,
-        input,
-        output,
+        input.reverse(),
+        output.reverse(),
         Extrapolate.CLAMP
       );
 
@@ -425,9 +425,7 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
                 onGestureEvent={handlePanGestureHandler}
               >
                 <Animated.View>
-                  <HandleComponent
-                    animatedPositionIndex={animatedPositionIndex}
-                  />
+                  <HandleComponent />
                 </Animated.View>
               </PanGestureHandler>
 
