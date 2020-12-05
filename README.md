@@ -1,7 +1,7 @@
 <div align="center">
-<h1>Bottom Sheet</h1>
+<h1>React Native Bottom Sheet</h1>
 
-[![npm](https://img.shields.io/npm/v/@gorhom/bottom-sheet?style=flat-square)](https://www.npmjs.com/package/@gorhom/bottom-sheet) [![npm](https://img.shields.io/npm/l/@gorhom/bottom-sheet?style=flat-square)](https://www.npmjs.com/package/@gorhom/bottom-sheet) [![npm](https://img.shields.io/badge/types-included-blue?style=flat-square)](https://www.npmjs.com/package/@gorhom/bottom-sheet)
+[![npm](https://img.shields.io/npm/v/@breeffy/react-native-bottom-sheet?style=flat-square)](https://www.npmjs.com/package/@breeffy/react-native-bottom-sheet) [![npm](https://img.shields.io/npm/l/@breeffy/react-native-bottom-sheet?style=flat-square)](https://www.npmjs.com/package/@breeffy/react-native-bottom-sheet) [![npm](https://img.shields.io/badge/types-included-blue?style=flat-square)](https://www.npmjs.com/package/@breeffy/react-native-bottom-sheet)
 
 <img src="./preview.gif">
 
