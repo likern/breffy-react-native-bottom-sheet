@@ -9,7 +9,7 @@ A performant interactive bottom sheet with fully configurable options 🚀
 
 </div>
 
-> Initially, this project was a cloned of `react-native-scroll-bottom-sheet` by [@rgommezz](https://github.com/rgommezz) ❤️. However, it is been fully re-written to add extra functionalities and simplify the approach.
+> Initially, this project was a cloned of `react-native-bottom-sheet` by [@gorhom](https://github.com/gorhom/react-native-bottom-sheet) ❤️. However, it is been fully re-written to add extra functionalities and simplify the approach.
 
 ---
 
@@ -46,9 +46,9 @@ A performant interactive bottom sheet with fully configurable options 🚀
 ## Installation
 
 ```sh
-yarn add @gorhom/bottom-sheet
+yarn add @breeffy/react-native-bottom-sheet
 # or
-npm install @gorhom/bottom-sheet
+npm install @breeffy/react-native-bottom-sheet
 ```
 
 > ⚠️ You need to install [react-native-reanimated v2](https://github.com/software-mansion/react-native-reanimated) & [react-native-gesture-handler](https://github.com/software-mansion/react-native-gesture-handler) and follow their installation instructions.
@@ -58,14 +58,21 @@ npm install @gorhom/bottom-sheet
 ```tsx
 import React, { useCallback, useMemo, useRef } from 'react';
 import { View, StyleSheet } from 'react-native';
-import BottomSheet from '@gorhom/bottom-sheet';
+import { BottomSheet, SnapPoint } from '@breeffy/react-native-bottom-sheet';
 
 const App = () => {
   // hooks
   const bottomSheetRef = useRef<BottomSheet>(null);
 
   // variables
-  const snapPoints = useMemo(() => ['25%', '50%', '90%'], []);
+  const snapPoints = useMemo<SnapPoint[]>(
+    () => [
+      { relativeTo: 'content', percentagesOf: 30 },
+      { relativeTo: 'content', percentagesOf: 70 },
+      { relativeTo: 'content', percentagesOf: 100 }
+    ],
+    []
+  );
 
   // callbacks
   const handleSheetChanges = useCallback((index: number) => {
@@ -109,7 +116,7 @@ Initial snap index. You also could provide {`-1`} to initiate bottom sheet in cl
 
 Points for the bottom sheet to snap to, `points should be sorted from bottom to top`. It accepts array of number, string or mix. String values should be a percentage.
 
-> `required:` YES | `type:` Array<string | number> <br> `example:` [100, '50%', '90%']
+> `required:` YES | `type:` SnapPoint[] <br> `example:` [{ relativeTo: 'window', percentagesOf: 10 },{ relativeTo: 'content', percentagesOf: 70 }, { relativeTo: 'content', percentagesOf: 100 }]
 
 #### `topInset`
 
@@ -243,24 +250,23 @@ This library provides a pre-integrated views that utilise an internal functional
 - [react-native-redash](https://github.com/wcandillon/react-native-redash)
 - [@react-native-community/bob](https://github.com/react-native-community/bob)
 
-## Author
-
-- [Mo Gorhom](https://gorhom.dev/)
+<!-- ## Author -->
+<!-- - [Victor Malov](https://gorhom.dev/) -->
 
 ## License
 
-MIT
+Apache-2.0
 
 <div align="center">
 
 Liked the library? 😇
 
-<a href="https://www.buymeacoffee.com/gorhom" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-red.png" alt="Buy Me A Coffee" height="50" ></a>
+<a href="https://www.buymeacoffee.com/breeffy" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-red.png" alt="Buy Me A Coffee" height="50" ></a>
 
 </div>
 
 ---
 
-<p align="center">
+<!-- <p align="center">
 <a href="https://gorhom.dev" target="_blank"><img alt="Mo Gorhom" src="./logo.png"></a>
-</p>
+</p> -->
