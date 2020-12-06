@@ -125,7 +125,7 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
     //#endregion
 
     //#region variables
-    const currentPositionIndexRef = useRef<number>(initialSnapIndex);
+    const sharedPositionIndex = useSharedValue(initialSnapIndex);
 
     // scrollable variables
     const {
@@ -172,7 +172,7 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
 
     //#region private methods
     const refreshUIElements = useCallback(() => {
-      const currentPositionIndex = Math.max(currentPositionIndexRef.current, 0);
+      const currentPositionIndex = Math.max(sharedPositionIndex.value, 0);
 
       if (currentPositionIndex === snapPoints.length - 1) {
         flashScrollableIndicators();
@@ -186,9 +186,9 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
           maxDeltaY: snapPoints[currentPositionIndex]
         });
       }
-    }, [snapPoints, flashScrollableIndicators]);
+    }, [sharedPositionIndex, snapPoints, flashScrollableIndicators]);
     const handleOnChange = useStableCallback((index: number) => {
-      currentPositionIndexRef.current = index;
+      sharedPositionIndex.value = index;
 
       if (_onChange) {
         /**
@@ -255,7 +255,7 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
           animatedPositionIndex.value
         );
 
-        if (tempCurrentPositionIndex !== currentPositionIndexRef.current) {
+        if (tempCurrentPositionIndex !== sharedPositionIndex.value) {
           runOnJS(handleOnChange)(tempCurrentPositionIndex);
           runOnJS(refreshUIElements)();
         }
@@ -264,7 +264,8 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
         animatedPositionIndex.value,
         animationState,
         handleOnChange,
-        refreshUIElements
+        refreshUIElements,
+        sharedPositionIndex
       ]
     );
 
