@@ -34,12 +34,21 @@ jobs:
           } else {
             return '${{ github.event.inputs.draft }}' === 'true' ? '--github.draft' : '--no-github.draft'
           }
+    - name: Import Feeve Bot GPG Key
+      env:
+        FEEVE_BOT_GPG_KEY: ${{ secrets.FEEVE_BOT_GPG_KEY }}
+      run: echo -e "$FEEVE_BOT_GPG_KEY" | gpg --import
     - name: Checkout source code
       uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f
+      with:
+          ssh-key: ${{ secrets.FEEVE_BOT_SSH_KEY }}
     - name: Setup git config
       run: |
-        git config user.name "github-actions[bot]"
-        git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git config user.name "Feeve Bot"
+        git config user.email feevebot@breeffy.com
+        git config user.signingkey C240C98C495BC1A3
+        git config commit.gpgSign true
+        git config tag.gpgSign true
     - name: Setup Node.js
       uses: actions/setup-node@c6fd00ceb9747fb23ffdf72987450a2664414867
       with:
