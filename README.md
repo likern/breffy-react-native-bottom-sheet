@@ -160,6 +160,18 @@ Component to be placed as a background.
 
 > `required:` NO | `type:` React.FC<ViewProps>
 
+#### `onAnimateDistinct`
+
+Determine will `onAnimate()` callback is called if animating to the same snap point.
+
+> `required:` NO | `type:` boolean | `default:` true
+
+#### `onAnimate`
+
+Callback when the sheet about to animate to a new position.
+
+> `required:` NO | `type:` (fromIndex: number, toIndex: number) => void
+
 #### `onChange`
 
 Callback when sheet position changed to a provided point.
