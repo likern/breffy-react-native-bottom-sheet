@@ -44,19 +44,19 @@ export interface BottomSheetProps extends BottomSheetAnimationConfigs {
    */
   backgroundComponent?: React.FC<ViewProps>;
   /**
-   * Callback when sheet position changed to a provided point.
+   * If **true**, `onChange()` and `onAnimate()` are called only when initial snap point and target snap point are different
+   * @type boolean | undefined
+   * @default true
+   */
+  onlyDistinctSnaps?: boolean;
+  /**
+   * Callback when the sheet position changed to a provided snap point index.
    * @type (index: number) => void;
    */
   onChange?: (index: number) => void;
   /**
-   * If **true**, `onAnimate()` is called only when **fromIndex** and **toIndex** are different
-   * @type boolean | undefined
-   * @default true
-   */
-  onAnimateDistinct?: boolean;
-  /**
-   * Callback when the sheet about to animate to a new position.
-   * @type (fromIndex: number, toIndex: number, distinct: boolean = false) => void;
+   * Callback when the sheet about to animate to a snap point, specified by index.
+   * @type (fromIndex: number, toIndex: number) => void;
    * @param fromIndex previous snap point index
    * @param toIndex next snap point index
    */
