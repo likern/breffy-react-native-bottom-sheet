@@ -64,11 +64,13 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
       initialSnapIndex = 0,
       snapPoints: _snapPoints,
       topInset = 0,
+      onAnimateDistinct = true,
       // animated callback shared values
       animatedPosition: _animatedPosition,
       animatedPositionIndex: _animatedPositionIndex,
       // callbacks
       onChange: _onChange,
+      onAnimate,
       // components
       handleComponent: HandleComponent = BottomSheetHandle,
       backgroundComponent: BackgroundComponent = null,
@@ -125,7 +127,7 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
     //#endregion
 
     //#region variables
-    const sharedPositionIndex = useSharedValue(initialSnapIndex);
+    const currentPositionIndex = useSharedValue(initialSnapIndex);
 
     // scrollable variables
     const {
@@ -142,6 +144,10 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
       onContentLayout,
       isWaitingLayout
     } = useSnapPoints(_snapPoints, topInset);
+
+    const sharedSnapPoints = useDerivedValue(() => {
+      return snapPoints;
+    }, [snapPoints]);
 
     // console.log(
     //   `snapPoints: ${JSON.stringify(
@@ -172,9 +178,9 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
 
     //#region private methods
     const refreshUIElements = useCallback(() => {
-      const currentPositionIndex = Math.max(sharedPositionIndex.value, 0);
+      const _currentPositionIndex = Math.max(currentPositionIndex.value, 0);
 
-      if (currentPositionIndex === snapPoints.length - 1) {
+      if (_currentPositionIndex === snapPoints.length - 1) {
         flashScrollableIndicators();
         // @ts-ignore
         contentWrapperGestureRef.current.setNativeProps({
@@ -183,12 +189,12 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
       } else {
         // @ts-ignore
         contentWrapperGestureRef.current.setNativeProps({
-          maxDeltaY: snapPoints[currentPositionIndex]
+          maxDeltaY: snapPoints[_currentPositionIndex]
         });
       }
-    }, [sharedPositionIndex, snapPoints, flashScrollableIndicators]);
+    }, [currentPositionIndex, snapPoints, flashScrollableIndicators]);
     const handleOnChange = useStableCallback((index: number) => {
-      sharedPositionIndex.value = index;
+      currentPositionIndex.value = index;
 
       if (_onChange) {
         /**
@@ -255,7 +261,7 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
           animatedPositionIndex.value
         );
 
-        if (tempCurrentPositionIndex !== sharedPositionIndex.value) {
+        if (tempCurrentPositionIndex !== currentPositionIndex.value) {
           runOnJS(handleOnChange)(tempCurrentPositionIndex);
           runOnJS(refreshUIElements)();
         }
@@ -265,13 +271,24 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
         animationState,
         handleOnChange,
         refreshUIElements,
-        sharedPositionIndex
+        currentPositionIndex
       ]
     );
 
     const animateToPoint = useCallback(
       (point: number) => {
         'worklet';
+
+        if (onAnimate !== undefined) {
+          const animateFromIndex = currentPositionIndex.value;
+          const animateToIndex = sharedSnapPoints.value.findIndex(
+            it => it === point
+          )!;
+          if (!onAnimateDistinct || animateFromIndex !== animateToIndex) {
+            runOnJS(onAnimate)(animateFromIndex, animateToIndex);
+          }
+        }
+
         animationState.value = ANIMATION_STATE.RUNNING;
         animatedPosition.value = withTiming(
           point,
@@ -285,9 +302,13 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
       [
         animationState,
         animatedPosition,
+        currentPositionIndex,
+        sharedSnapPoints,
         animationDuration,
         animationEasing,
-        animateToPointCompleted
+        animateToPointCompleted,
+        onAnimateDistinct,
+        onAnimate
       ]
     );
 

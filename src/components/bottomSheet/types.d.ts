@@ -49,6 +49,19 @@ export interface BottomSheetProps extends BottomSheetAnimationConfigs {
    */
   onChange?: (index: number) => void;
   /**
+   * If **true**, `onAnimate()` is called only when **fromIndex** and **toIndex** are different
+   * @type boolean | undefined
+   * @default true
+   */
+  onAnimateDistinct?: boolean;
+  /**
+   * Callback when the sheet about to animate to a new position.
+   * @type (fromIndex: number, toIndex: number, distinct: boolean = false) => void;
+   * @param fromIndex previous snap point index
+   * @param toIndex next snap point index
+   */
+  onAnimate?: (fromIndex: number, toIndex: number) => void;
+  /**
    * A scrollable node or normal view.
    * @type React.ReactNode[] | React.ReactNode
    */

@@ -43,6 +43,14 @@ const createExampleScreen = ({ type, count = 50 }: ExampleScreenProps) =>
     const handleClosePress = useCallback(() => {
       bottomSheetRef.current?.close();
     }, []);
+    const onBottomSheetAnimate = useCallback(
+      (fromIndex: number, toIndex: number) => {
+        console.log(
+          `onBottomSheetAnimate: animate from index ${fromIndex} to index ${toIndex}`
+        );
+      },
+      []
+    );
 
     return (
       <View style={styles.container}>
@@ -81,6 +89,8 @@ const createExampleScreen = ({ type, count = 50 }: ExampleScreenProps) =>
           snapPoints={snapPoints}
           initialSnapIndex={1}
           topInset={headerHeight}
+          onAnimateDistinct={true}
+          onAnimate={onBottomSheetAnimate}
           onChange={handleSheetChange}
         >
           <ContactList key={`${type}.list`} type={type} count={count} />
