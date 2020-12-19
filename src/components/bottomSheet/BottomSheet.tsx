@@ -64,7 +64,7 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
       initialSnapIndex = 0,
       snapPoints: _snapPoints,
       topInset = 0,
-      onAnimateDistinct = true,
+      onlyDistinctSnaps = true,
       // animated callback shared values
       animatedPosition: _animatedPosition,
       animatedPositionIndex: _animatedPositionIndex,
@@ -196,13 +196,29 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
     const handleOnChange = useStableCallback((index: number) => {
       currentPositionIndex.value = index;
 
-      if (_onChange) {
+      if (_onChange !== undefined) {
         /**
          * to avoid having -0 🤷‍♂️
          */
         _onChange(index + 1 - 1);
       }
     });
+
+    const handleOnAnimateToPoint = useCallback(
+      (point: number) => {
+        'worklet';
+        if (onAnimate !== undefined) {
+          const fromIndex = currentPositionIndex.value;
+          const toIndex = sharedSnapPoints.value.findIndex(it => it === point)!;
+
+          if (!onlyDistinctSnaps || fromIndex !== toIndex) {
+            runOnJS(onAnimate)(fromIndex, toIndex);
+          }
+        }
+      },
+      [onlyDistinctSnaps, sharedSnapPoints, currentPositionIndex, onAnimate]
+    );
+
     const handleSettingScrollableRef = useCallback(
       (scrollableRef: ScrollableRef) => {
         setScrollableRef(scrollableRef);
@@ -257,16 +273,24 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
         if (!isCancelled) {
           return;
         }
+
         const tempCurrentPositionIndex = Math.round(
           animatedPositionIndex.value
         );
 
-        if (tempCurrentPositionIndex !== currentPositionIndex.value) {
-          runOnJS(handleOnChange)(tempCurrentPositionIndex);
+        const fromIndex = currentPositionIndex.value;
+        const toIndex = tempCurrentPositionIndex;
+
+        if (!onlyDistinctSnaps || fromIndex !== toIndex) {
+          runOnJS(handleOnChange)(toIndex);
+        }
+
+        if (fromIndex !== toIndex) {
           runOnJS(refreshUIElements)();
         }
       },
       [
+        onlyDistinctSnaps,
         animatedPositionIndex.value,
         animationState,
         handleOnChange,
@@ -279,16 +303,7 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
       (point: number) => {
         'worklet';
 
-        if (onAnimate !== undefined) {
-          const animateFromIndex = currentPositionIndex.value;
-          const animateToIndex = sharedSnapPoints.value.findIndex(
-            it => it === point
-          )!;
-          if (!onAnimateDistinct || animateFromIndex !== animateToIndex) {
-            runOnJS(onAnimate)(animateFromIndex, animateToIndex);
-          }
-        }
-
+        handleOnAnimateToPoint(point);
         animationState.value = ANIMATION_STATE.RUNNING;
         animatedPosition.value = withTiming(
           point,
@@ -302,13 +317,10 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
       [
         animationState,
         animatedPosition,
-        currentPositionIndex,
-        sharedSnapPoints,
         animationDuration,
         animationEasing,
         animateToPointCompleted,
-        onAnimateDistinct,
-        onAnimate
+        handleOnAnimateToPoint
       ]
     );
 
