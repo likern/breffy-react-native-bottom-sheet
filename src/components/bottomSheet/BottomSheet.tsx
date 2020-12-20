@@ -288,7 +288,7 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
       },
       [
         onlyDistinctSnaps,
-        animatedPositionIndex.value,
+        animatedPositionIndex,
         animationState,
         handleOnChange,
         refreshUIElements,
