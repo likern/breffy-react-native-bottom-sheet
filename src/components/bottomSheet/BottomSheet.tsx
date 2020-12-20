@@ -283,9 +283,6 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
 
         if (!onlyDistinctSnaps || fromIndex !== toIndex) {
           runOnJS(handleOnChange)(toIndex);
-        }
-
-        if (fromIndex !== toIndex) {
           runOnJS(refreshUIElements)();
         }
       },
