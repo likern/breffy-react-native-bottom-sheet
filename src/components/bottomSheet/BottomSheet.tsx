@@ -300,6 +300,10 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
       (point: number) => {
         'worklet';
 
+        console.log(
+          `animateToPoint: before animation: animatedPosition is ${animatedPosition.value}`
+        );
+
         handleOnAnimateToPoint(point);
         animationState.value = ANIMATION_STATE.RUNNING;
         animatedPosition.value = withTiming(
@@ -346,6 +350,9 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
           `'index' was provided but out of the provided snap points range! expected value to be between -1, ${
             snapPoints.length - 1
           }`
+        );
+        console.log(
+          `handleSnapTo: index is ${index}, animate to snap point: ${snapPoints[index]}`
         );
         runOnUI(animateToPoint)(snapPoints[index]);
       },
