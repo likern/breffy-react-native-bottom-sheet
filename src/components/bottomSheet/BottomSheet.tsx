@@ -301,7 +301,7 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
         'worklet';
 
         console.log(
-          `animateToPoint: before animation: animatedPosition is ${animatedPosition.value}`
+          `animateToPoint: before animation: point is ${point}, animatedPosition is ${animatedPosition.value}`
         );
 
         handleOnAnimateToPoint(point);
