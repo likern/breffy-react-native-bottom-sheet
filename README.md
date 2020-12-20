@@ -160,9 +160,9 @@ Component to be placed as a background.
 
 > `required:` NO | `type:` React.FC<ViewProps>
 
-#### `onAnimateDistinct`
+#### `onlyDistinctSnaps`
 
-Determine will `onAnimate()` callback is called if animating to the same snap point.
+Determine will `onChange()` and `onAnimate()` callbacks be called if animating to the same snap point.
 
 > `required:` NO | `type:` boolean | `default:` true
 

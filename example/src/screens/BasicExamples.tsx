@@ -89,7 +89,7 @@ const createExampleScreen = ({ type, count = 50 }: ExampleScreenProps) =>
           snapPoints={snapPoints}
           initialSnapIndex={1}
           topInset={headerHeight}
-          onAnimateDistinct={true}
+          onlyDistinctSnaps={false}
           onAnimate={onBottomSheetAnimate}
           onChange={handleSheetChange}
         >

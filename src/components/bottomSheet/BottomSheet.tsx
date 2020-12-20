@@ -64,7 +64,7 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
       initialSnapIndex = 0,
       snapPoints: _snapPoints,
       topInset = 0,
-      onAnimateDistinct = true,
+      onlyDistinctSnaps = true,
       // animated callback shared values
       animatedPosition: _animatedPosition,
       animatedPositionIndex: _animatedPositionIndex,
@@ -78,7 +78,6 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
     },
     ref
   ) => {
-    //#region validate props
     // validate `snapPoints`
     invariant(
       _snapPoints,
@@ -124,9 +123,7 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
       typeof animationEasing === 'function',
       `'animationEasing' was provided but with wrong type ! expected type is a Animated.EasingFunction.`
     );
-    //#endregion
 
-    //#region variables
     const currentPositionIndex = useSharedValue(initialSnapIndex);
 
     // scrollable variables
@@ -149,16 +146,6 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
       return snapPoints;
     }, [snapPoints]);
 
-    // console.log(
-    //   `snapPoints: ${JSON.stringify(
-    //     snapPoints
-    //   )}, sheetHeight: ${sheetHeight}, isWaitingLayout: ${isWaitingLayout}`
-    // );
-
-    // console.log(
-    //   `initialSnapIndex: ${initialSnapIndex}, currentPositionIndexRef: ${currentPositionIndexRef.current}`
-    // );
-
     const initialPosition = useMemo(() => {
       return initialSnapIndex < 0 || isWaitingLayout
         ? sheetHeight
@@ -174,9 +161,7 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
       () => snapPoints[Math.max(initialSnapIndex, 0)],
       [snapPoints, initialSnapIndex]
     );
-    //#endregion
 
-    //#region private methods
     const refreshUIElements = useCallback(() => {
       const _currentPositionIndex = Math.max(currentPositionIndex.value, 0);
 
@@ -193,16 +178,33 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
         });
       }
     }, [currentPositionIndex, snapPoints, flashScrollableIndicators]);
+
     const handleOnChange = useStableCallback((index: number) => {
       currentPositionIndex.value = index;
 
-      if (_onChange) {
+      if (_onChange !== undefined) {
         /**
          * to avoid having -0 🤷‍♂️
          */
         _onChange(index + 1 - 1);
       }
     });
+
+    const handleOnAnimateToPoint = useCallback(
+      (point: number) => {
+        'worklet';
+        if (onAnimate !== undefined) {
+          const fromIndex = currentPositionIndex.value;
+          const toIndex = sharedSnapPoints.value.findIndex(it => it === point)!;
+
+          if (!onlyDistinctSnaps || fromIndex !== toIndex) {
+            runOnJS(onAnimate)(fromIndex, toIndex);
+          }
+        }
+      },
+      [onlyDistinctSnaps, sharedSnapPoints, currentPositionIndex, onAnimate]
+    );
+
     const handleSettingScrollableRef = useCallback(
       (scrollableRef: ScrollableRef) => {
         setScrollableRef(scrollableRef);
@@ -210,23 +212,19 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
       },
       [setScrollableRef, refreshUIElements]
     );
-    //#endregion
 
-    //#region gesture interaction / animation
     // variables
     const animationState = useSharedValue(ANIMATION_STATE.UNDETERMINED);
-    // console.log(`initialPosition: ${initialPosition}`);
     const animatedPosition = useSharedValue(initialPosition);
     const animatedPositionIndex = useDerivedValue(() => {
       const input = isWaitingLayout
         ? [sheetHeight, sheetHeight]
         : [sheetHeight].concat(snapPoints.slice());
-      // console.log(`input: ${input}, typeof input: ${typeof input}`);
 
       const output = isWaitingLayout
         ? [-1, -1]
         : [-1].concat(snapPoints.slice().map((_, index) => index));
-      // console.log(`output: ${output}, typeof output: ${typeof output}`);
+
       const interpolatedIndex = interpolate(
         animatedPosition.value,
         input.reverse(),
@@ -234,21 +232,9 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
         Extrapolate.CLAMP
       );
 
-      // console.log(
-      //   `animatedPositionIndex: animatedPosition: ${animatedPosition.value}, interpolatedIndex: ${interpolatedIndex}, input: ${input}, output: ${output}`
-      // );
       return interpolatedIndex;
     }, [snapPoints, sheetHeight, isWaitingLayout]);
 
-    // TODO: Uncomment this to watch on animatedPosition
-    // useDerivedValue(() => {
-    //   console.log(
-    //     `animatedPosition: ${animatedPosition.value}, animatedPositionIndex: ${animatedPositionIndex.value}`
-    //   );
-    //   return animatedPosition.value;
-    // }, []);
-
-    // callbacks
     const animateToPointCompleted = useCallback(
       isCancelled => {
         'worklet';
@@ -257,17 +243,22 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
         if (!isCancelled) {
           return;
         }
+
         const tempCurrentPositionIndex = Math.round(
           animatedPositionIndex.value
         );
 
-        if (tempCurrentPositionIndex !== currentPositionIndex.value) {
-          runOnJS(handleOnChange)(tempCurrentPositionIndex);
+        const fromIndex = currentPositionIndex.value;
+        const toIndex = tempCurrentPositionIndex;
+
+        if (!onlyDistinctSnaps || fromIndex !== toIndex) {
+          runOnJS(handleOnChange)(toIndex);
           runOnJS(refreshUIElements)();
         }
       },
       [
-        animatedPositionIndex.value,
+        onlyDistinctSnaps,
+        animatedPositionIndex,
         animationState,
         handleOnChange,
         refreshUIElements,
@@ -279,16 +270,7 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
       (point: number) => {
         'worklet';
 
-        if (onAnimate !== undefined) {
-          const animateFromIndex = currentPositionIndex.value;
-          const animateToIndex = sharedSnapPoints.value.findIndex(
-            it => it === point
-          )!;
-          if (!onAnimateDistinct || animateFromIndex !== animateToIndex) {
-            runOnJS(onAnimate)(animateFromIndex, animateToIndex);
-          }
-        }
-
+        handleOnAnimateToPoint(point);
         animationState.value = ANIMATION_STATE.RUNNING;
         animatedPosition.value = withTiming(
           point,
@@ -302,13 +284,10 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
       [
         animationState,
         animatedPosition,
-        currentPositionIndex,
-        sharedSnapPoints,
         animationDuration,
         animationEasing,
         animateToPointCompleted,
-        onAnimateDistinct,
-        onAnimate
+        handleOnAnimateToPoint
       ]
     );
 
@@ -327,9 +306,7 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
       animateToPoint,
       scrollableContentOffsetY
     );
-    //#endregion
 
-    //#region public methods
     const handleSnapTo = useCallback(
       (index: number) => {
         invariant(
@@ -357,12 +334,9 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
       collapse: handleCollapse,
       close: handleClose
     }));
-    //#endregion
 
-    //#region contexts variables
     const internalContextVariables = useMemo(
       () => {
-        // console.log(`internalContextVariables is updated!`);
         return {
           animatedPosition,
           animationState,
@@ -386,9 +360,7 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
       }),
       [handleSnapTo, handleExpand, handleCollapse, handleClose]
     );
-    //#endregion
 
-    //#region styles
     const contentContainerStyle = useMemo<Animated.AnimateStyle<ViewStyle>>(
       () => ({
         ...styles.container
@@ -400,9 +372,7 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
         transform: [{ translateY: animatedPosition.value }]
       };
     }, []);
-    //#endregion
 
-    //#region effects
     useAnimatedReaction(
       () => animatedPosition.value,
       (value: number) => {
@@ -421,12 +391,7 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
       },
       [_animatedPositionIndex]
     );
-    //#endregion
 
-    // render
-    // console.log(
-    //   `[ContentWrapper] maxDeltaY: ${contentWrapperMaxDeltaY}, height: ${sheetHeight}`
-    // );
     return (
       <>
         <ContentWrapper
