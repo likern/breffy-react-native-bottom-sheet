@@ -62,10 +62,10 @@ const data = [
         name: 'Shadow Overlay',
         slug: 'ShadowOverlayExample'
       },
-      {
-        name: 'Map',
-        slug: 'MapExample'
-      },
+      // {
+      //   name: 'Map',
+      //   slug: 'MapExample'
+      // },
       { name: 'Swipe to Close', slug: 'SwipeToCloseExample' }
     ]
   }
@@ -87,8 +87,8 @@ const RootScreen = () => {
       name="Bottom Sheet"
       description={description}
       author={{
-        username: 'Mo Gorhom',
-        url: 'https://gorhom.dev'
+        username: 'Victor Malov',
+        url: 'https://github.com/likern'
       }}
       data={data}
       safeInsets={safeInsets}

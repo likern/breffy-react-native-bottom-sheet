@@ -11,7 +11,7 @@ import {
   NavigatorExample,
   CustomHandleExample,
   ShadowOverlayExample,
-  MapExample,
+  // MapExample,
   FlatListDynamicExampleScreen,
   ScrollViewDynamicExampleScreen,
   SectionListDynamicExampleScreen,
@@ -70,13 +70,16 @@ function App() {
           name="ShadowOverlayExample"
           component={ShadowOverlayExample}
         />
-        <Stack.Screen
+        {
+          // FIXME: Fix and enable Map example
+          /* <Stack.Screen
           name="MapExample"
           component={MapExample}
           options={{
             headerShown: false
           }}
-        />
+        /> */
+        }
         <Stack.Screen
           name="SwipeToCloseExample"
           component={SwipeToCloseExample}

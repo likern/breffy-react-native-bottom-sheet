@@ -9,7 +9,8 @@ interface TextProps {
   style?: Animated.AnimateProps<TextStyle, RNTextProps>['style'];
 }
 
-const AnimatedTextInput = Animated.createAnimatedComponent(TextInput);
+// FIXME: Refine types
+const AnimatedTextInput = Animated.createAnimatedComponent<any, any>(TextInput);
 
 const ReText = (props: TextProps) => {
   const { text, value, style } = { style: {}, ...props };

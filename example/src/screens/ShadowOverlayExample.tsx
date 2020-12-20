@@ -7,7 +7,7 @@ import Animated, {
   interpolate,
   Extrapolate
 } from 'react-native-reanimated';
-import { BottomSheet } from '@breeffy/react-native-bottom-sheet';
+import { BottomSheet, SnapPoint } from '@breeffy/react-native-bottom-sheet';
 import Button from '../components/button';
 import ContactList from '../components/contactList';
 
@@ -17,7 +17,14 @@ const ShadowOverlayExample = () => {
   const headerHeight = useHeaderHeight();
 
   // variables
-  const snapPoints = useMemo(() => ['25%', '50%', '90%'], []);
+  const snapPoints = useMemo<SnapPoint[]>(
+    () => [
+      { relativeTo: 'window', percentagesOf: 25 },
+      { relativeTo: 'window', percentagesOf: 50 },
+      { relativeTo: 'window', percentagesOf: 90 }
+    ],
+    []
+  );
   const animatedPositionIndex = useSharedValue<number>(0);
 
   // styles
